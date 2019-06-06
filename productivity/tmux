@@ -1,0 +1,18 @@
+--- Sessions ---
+
+# Creates a new session
+tmux new -s [session_name]
+
+# List existing tmux sessions
+tmux list-sessions
+
+# Switch to existing session
+tmux switch -t [session_name]
+
+----- Tabs ------
+
+# Create new window
+tmux new-window (prefix + c)
+
+# Switch to new window
+tmux select-window -t :0-9 (prefix + 0-9)
