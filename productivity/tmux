@@ -1,18 +1,24 @@
 --- Sessions ---
 
-# Creates a new session
-tmux new -s [session_name]
+tmux new -s [session_name] 	# Creates a new session
 
-# List existing tmux sessions
-tmux list-sessions
+tmux list-sessions		# List existing tmux sessions
 
-# Switch to existing session
-tmux switch -t [session_name]
+tmux switch -t [session_name]	# Switch to existing session
 
------ Tabs ------
+tmux kill-session -t [session]  # Kill a session
 
-# Create new window
-tmux new-window (prefix + c)
+tmux detach (prefix + d) 	# Detach from a session
 
-# Switch to new window
-tmux select-window -t :0-9 (prefix + 0-9)
+tmux attach -t [session_name]	# Attach from a session
+
+---- Windows ----
+
+(prefix + c)	# Create new window
+(prefix + w)	# List windows
+(prefix + ,)	# Name window
+
+----- Panes -----
+
+(prefix + %)	# Vertical split
+(prefix + ")	# Horizontal split

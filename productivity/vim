@@ -1,0 +1,10 @@
+--- General ---
+
+u	# Undo
+Ctrl+r 	# Redo
+
+-- Cut/Paste --
+
+v	# Enter Visual
+d	# Cut
+p/P	# Paste
