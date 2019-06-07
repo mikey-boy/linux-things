@@ -1,10 +1,16 @@
---- General ---
+---- General ----
 
 u	# Undo
 Ctrl+r 	# Redo
 
--- Cut/Paste --
+--- Cut/Paste ---
 
 v	# Enter Visual
 d	# Cut
 p/P	# Paste
+
+--- Searching ---
+
+/[word]		# Basic search
+/[word]\c	# Case insensitive search
+n		# Next occurance

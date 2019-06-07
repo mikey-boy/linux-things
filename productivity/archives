@@ -1,0 +1,11 @@
+--- tar files ---
+
+tar xvzf [file].tar.gz 		# Decompress and detar
+tar xvjf [file].tar.gz		# Decompress and detar
+tar -cf [archive].tar [files]	# Compress
+
+--- zip files ---
+
+unzip [file].zip		# Unzip
+unzip -d [file].zip		# Unzip into directory
+zip -r [archive].zip [dir]	# Compress whole directory recursively
