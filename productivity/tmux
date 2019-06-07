@@ -22,3 +22,4 @@ tmux attach -t [session_name]	# Attach from a session
 
 (prefix + %)	# Vertical split
 (prefix + ")	# Horizontal split
+(prefix + Dpad)	# Switch pane
