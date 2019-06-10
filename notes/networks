@@ -1,0 +1,25 @@
+# Linux Network Configuration
+
+--- Config files ---
+
+/etc/resolv.conf 	# List DNS servers for domain name resolution
+			# This file will tell Linux which servers to contact when it
+			# needs to resolve a hostname. If using DHCP, ISP will send you
+			# information that is loaded into this file.
+
+/etc/hosts		# Lists hosts to be resolved locally (i.e. localhost)
+/etc/nsswitch.conf	# List order of host name search (i.e. first 'hosts' file, then DNS)
+/etc/network/interfaces # Specify network configs and devices (Static IP & info, DHCP)
+			
+
+--- IP addresses ---
+
+# Assigning an IP address
+# Network address by convention would be the lowest: 192.168.10.0
+# Broadcast address by convention would be the highest: 192.168.10.255
+# The gateway router can be anything, but following convention: 192.168.10.1
+ifconfig eth0 192.168.10.12 netmask 255.255.255.0 broadcast 192.168.10.255
+
+# Private IP Range
+192.168.0.0 to 192.168.255.255
+
