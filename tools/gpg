@@ -1,0 +1,43 @@
+# GnuPG Secure Communications
+
+#--- New Keypair ---#
+
+# It is good practice to secure private keys with a passphrase
+gpg --gen-key
+
+# Revocation certificate, used if you forget your passphrase or your private key is compromised
+gpg --output revoke.asc --gen-revoke [keyID/key specifier/userID]
+
+
+#--- Exchange Keys ---#
+
+gpg --list-keys
+
+# Export key for transfer (with Ascii armour)
+gpg --output [file].gpg --armor --export [keyID/userID]
+
+
+#--- Import Key ---#
+
+gpg --import [key].gpg
+
+# Check fingerprint (i.e. verifying the public key)
+gpg --edit-key [keyID/userID]
+	> fpr
+	> sign
+
+
+#--- Encrypting Docs ---#
+
+gpg --output doc.gpg --encrypt --recipient [keyID/userID] [doc]
+
+
+#--- Decrypting Docs ---#
+
+gpg --output doc --decrypt doc.gpg
+
+
+#--- Symmetric Encryption ---#
+
+gpg --output doc.gpg --symmetric doc
+
