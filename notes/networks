@@ -23,3 +23,9 @@ ifconfig eth0 192.168.10.12 netmask 255.255.255.0 broadcast 192.168.10.255
 # Private IP Range
 192.168.0.0 to 192.168.255.255
 
+
+--- Gateways and Routing ---
+
+# Typically on a single machine routing is easy, tell your computer to use IP address of the gateway supplied by your ISP and you are fine. With a network of computers this is more dificult, especially if a firewall is needed.
+netstat -r 	# To view the kernel's routing table 
+

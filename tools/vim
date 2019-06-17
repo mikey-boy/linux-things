@@ -6,6 +6,7 @@ Ctrl+r 	# Redo
 --- Cut/Paste ---
 
 v	# Enter Visual
+V	# Select lines
 d	# Cut
 p/P	# Paste
 

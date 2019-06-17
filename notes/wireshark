@@ -1,0 +1,23 @@
+#--- Capture Filters ---#
+
+Much more restricted than display filters, used to reduce raw capture size
+
+--- Filters (IPs)---
+
+host 10.10.10.10 	# Capture traffic to and from this host
+
+net 10.10.10.10/24	# Capture traffic to this range
+
+dst net 192.168.0.0/24 	# Outbound
+src net 192.168.0.0/24	# Inbound
+
+--- Filters (ports) ---
+
+port 53							# Capture only DNS (port 53) traffic
+
+host www.example.com and not (port 80 or port 25)	# Skip HTTP and SMTP traffic
+
+
+
+#--- Display Filters ---#
+
