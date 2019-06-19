@@ -26,6 +26,19 @@ ifconfig eth0 192.168.10.12 netmask 255.255.255.0 broadcast 192.168.10.255
 
 --- Gateways and Routing ---
 
-# Typically on a single machine routing is easy, tell your computer to use IP address of the gateway supplied by your ISP and you are fine. With a network of computers this is more dificult, especially if a firewall is needed.
-netstat -r 	# To view the kernel's routing table 
+# Typically on a single machine routing is easy, tell your computer to use IP address of 
+# the gateway supplied by your ISP and you are fine. With a network of computers this is 
+# more difficult, especially if a firewall is needed.
+netstat -r 	# To view the kernel's routing table
 
+--- DNS ---
+
+# DNS REGISTRAR
+# A company that registers your domain name in a top-level doman such as 'com'. It will
+# establish a set of records in the parent domain indicating the authoritative name servers
+# for that domain.
+
+# DNS RECORDS
+# A 	- used to point a domain or subdomain to an IP address
+# CNAME - used to point a domain or subdomain to another hostname
+# MX	- servers specified for handling mail
