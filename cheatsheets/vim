@@ -3,12 +3,19 @@
 u	# Undo
 Ctrl+r 	# Redo
 
---- Cut/Paste ---
+--- Cut/Paste (Visual Mode) ---
 
-v	# Enter Visual
-V	# Select lines
-d	# Cut
-p/P	# Paste
+		# Position cursor
+v/V/Ctrl-v 	# v selects characters, V selects lines, Ctrl-v selects blocks
+		# Move cursor to end of what you want to cut
+d/y		# d to cut, y to copy
+p/P		# Paste
+
+--- Cut/Paste (Normal Mode) ---
+
+yyy/Y	# Yank current line
+ytx	# Yank up to and before character (x)	
+yfx	# Yank up to and including character (x)	
 
 --- Searching ---
 
