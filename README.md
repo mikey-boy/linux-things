@@ -1,3 +1,3 @@
-# Code-Snippets
+# Linux Things
 
-A collection of code snippets. Most will pertain to Linux systems and Infosec.
+A collection of notes,scripts,configs,etc. that I use when working in Linux.
