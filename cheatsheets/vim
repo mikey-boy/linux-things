@@ -1,0 +1,24 @@
+---- General ----
+
+u	# Undo
+Ctrl+r 	# Redo
+
+--- Cut/Paste (Visual Mode) ---
+
+		# Position cursor
+v/V/Ctrl-v 	# v selects characters, V selects lines, Ctrl-v selects blocks
+		# Move cursor to end of what you want to cut
+d/y		# d to cut, y to copy
+p/P		# Paste
+
+--- Cut/Paste (Normal Mode) ---
+
+yyy/Y	# Yank current line
+ytx	# Yank up to and before character (x)	
+yfx	# Yank up to and including character (x)	
+
+--- Searching ---
+
+/[word]		# Basic search
+/[word]\c	# Case insensitive search
+n		# Next occurance

@@ -1,0 +1,14 @@
+--- Updating sources ---
+
+wget -qO - [url_for_GPG_key] | sudo apt-key add - 	# Add gpg key for app
+
+--- Install apps ---
+
+sudo apt update		# Updates the package listing
+sudo apt install [app]	# Installs specified application
+
+--- Other commands ---
+
+dpkg –list			# List all installed packages
+sudo apt remove --purge [app] 	# Remove specified app and configuration files
+sudo apt autoremove		# Remove unused packages

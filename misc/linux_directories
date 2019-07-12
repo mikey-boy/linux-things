@@ -1,0 +1,50 @@
+#! Taken from the Linux Command Line by William E.Shotts !#
+
+
+/bin 	# Contains binaries that must be present for system to boot & run
+
+/boot	# Contains Linux kernel, intial RAM image, boot loader
+	# Interesting: 	/boot/grub/grub.conf - used to configure boot loader
+	#		/boot/vmlinuz	     - the Linux kernel
+
+/dev 	# Contains device nodes (list of devices the kernel understands)
+
+/etc	# System wide configuration files. Also contains scripts that start system services
+	# Interesting: 	/etc/crontab	- automated jobs
+	#		/etc/fstab	- table of storage devices and their mount points
+
+/home	# Each user is given directory in home
+
+/lib	# Containes shared library files use by the core system program
+
+/media	# Mount points for removable media
+
+/mnt	# Old mount point for removable media
+
+/opt	# Holds optional (commercial) software installed on your system
+
+/proc 	# A virtual filesystem. Used to look at the kernel itself
+
+/sbin	# System binaries, used for vital system tasks
+
+
+
+/usr		# All programs and suppor files used by regular users
+
+/usr/bin 	# Exectutables installed by your Linux distrobution
+
+/usr/lib 	# Shared libraries for programs in /usr/bin
+
+/usr/local	# System-wide programs that are not included in distribution.
+		# Programs compiled from source are installed in /usr/local/bin
+
+/usr/share	# Shared data used by programs in /usr/bin
+
+/usr/share/doc	# Documentation of installed packages
+
+
+
+/var 		# Data that is likely to change goes here (logs, databases, etc.)
+
+/var/log 	# Contains log messages, should be monitored from time to time
+		# Important: /var/log/messages

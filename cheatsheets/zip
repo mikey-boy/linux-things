@@ -1,0 +1,6 @@
+--- zip files ---
+
+unzip [file].zip		# Unzip
+unzip -d [file].zip		# Unzip into directory
+zip -r [archive].zip [dir]	# Compress whole directory recursively
+
