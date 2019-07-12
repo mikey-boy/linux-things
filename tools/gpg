@@ -16,16 +16,16 @@ gpg --list-keys
 # Export key for transfer (with Ascii armour)
 gpg --output [file].gpg --armor --export [keyID/userID]
 
+#--- Importing Key ---#
 
-#--- Import Key ---#
+# Check fingerprint of key
+gpg --with-fingerprint key.asc
 
+# Import key
 gpg --import [key].gpg
 
-# Check fingerprint (i.e. verifying the public key)
-gpg --edit-key [keyID/userID]
-	> fpr
-	> sign
-
+# Verify signature
+gpg --verify [file].sig [file]
 
 #--- Encrypting Docs ---#
 
