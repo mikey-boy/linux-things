@@ -1,0 +1,11 @@
+--- Cursor movement ---
+
+Ctl-a	# Move to beginning of line
+Ctl-e 	# Move to end of line
+Ctl-l 	# Equivalent to 'clear'
+
+--- Kill/yank ---
+
+Ctl-k 	# Kill text from cursor to end of line
+Ctl-u	# Kill text from cursor to beginning of line
+Ctl-y 	# Yank text from killring and insert
