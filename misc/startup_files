@@ -1,0 +1,16 @@
+--- Definitions ---
+
+login shell 	- prompted for username/password
+non-login shell - terminal session started from GUI
+
+--- Startup files (login shell) ---
+
+/etc/profile		# Global config for all users
+~/.bash_profile 	# User's personal startup file. Can override global startup file
+~/.bash_login		# Used if .bash_profle not present
+~/.profile		# Used if neither .bash_profile nor .bash_login present
+
+--- Startup files (non-login shell) ---
+
+/etc/bash.bashrc	# Global config for all users
+/etc/.bashrc		# User's personal startup file

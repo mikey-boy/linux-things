@@ -11,3 +11,8 @@ ps	# Processes associated with current terminal session
 ps x	# Show all of our process, regardless of terminal
 ps aux	# Show all processes of every user
 
+--- Alternatives ---
+
+top 	# Like ps but with real-time updates
+pstree	# Shows processes as child/parent relation tree
+vmstat	# Shows system resource usage
