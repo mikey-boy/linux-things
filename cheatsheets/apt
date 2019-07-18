@@ -14,5 +14,7 @@ sudo apt autoremove		# Remove unused packages
 
 --- Other commands ---
 
-dpkg –list			# List all installed packages
-sudp apt upgrade		# Install latest version of software
+dpkg --list			# List all installed packages
+dpkg --install [pkg].deb	# Install package file
+sudo apt upgrade		# Install latest version of software
+apt-cache search [pkg]		# Get info on installed package
