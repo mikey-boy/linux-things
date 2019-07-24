@@ -25,6 +25,8 @@ n		# Next occurance
 
 Shift-6 (^)	# Shift to beginning of line
 Shift-4	($)	# Shift to end of line
+Shift-W		# Shift forward a word
+Shift-B		# Shift back a word
 #-Shift-G	# Shift to line number
 Shift-G		# Shift to end of file
 
