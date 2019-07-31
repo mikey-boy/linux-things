@@ -1,7 +1,7 @@
 --- Definitions ---
 
-login shell 	- prompted for username/password
-non-login shell - terminal session started from GUI
+login shell 	- prompted for username/password (SSH, su -)
+non-login shell - terminal session started from GUI (when you start shell from existing session)
 
 --- Startup files (login shell) ---
 
@@ -12,5 +12,6 @@ non-login shell - terminal session started from GUI
 
 --- Startup files (non-login shell) ---
 
+~/.bashrc		# Used specifically for interactive, non-login shells
 /etc/bash.bashrc	# Global config for all users
 /etc/.bashrc		# User's personal startup file
