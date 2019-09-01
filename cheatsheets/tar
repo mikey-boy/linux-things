@@ -1,5 +1,5 @@
 --- tar files ---
 
 tar xvzf [file].tar.gz 		# Decompress and detar
-tar xvjf [file].tar.gz		# Decompress and detar
+tar xvjf [file].tar.bzip2	# Decompress and detar
 tar -cf [archive].tar [files]	# Compress
