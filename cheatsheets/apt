@@ -4,11 +4,17 @@ wget -qO - [url_for_GPG_key] | sudo apt-key add - 	# Add gpg key for app
 
 --- Install apps ---
 
-sudo apt update		# Updates the package listing
-sudo apt install [app]	# Installs specified application
+sudo apt update			# Updates the package listing
+sudo apt install [app]		# Installs specified application
+
+--- Removing apps ---
+
+sudo apt remove --purge [app] 	# Remove specified app and configuration files
+sudo apt autoremove		# Remove unused packages
 
 --- Other commands ---
 
-dpkg –list			# List all installed packages
-sudo apt remove --purge [app] 	# Remove specified app and configuration files
-sudo apt autoremove		# Remove unused packages
+dpkg --list			# List all installed packages
+dpkg --install [pkg].deb	# Install package file
+sudo apt upgrade		# Install latest version of software
+apt-cache search [pkg]		# Get info on installed package

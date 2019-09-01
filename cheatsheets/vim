@@ -5,20 +5,42 @@ Ctrl+r 	# Redo
 
 --- Cut/Paste (Visual Mode) ---
 
-		# Position cursor
 v/V/Ctrl-v 	# v selects characters, V selects lines, Ctrl-v selects blocks
-		# Move cursor to end of what you want to cut
 d/y		# d to cut, y to copy
 p/P		# Paste
 
 --- Cut/Paste (Normal Mode) ---
 
-yyy/Y	# Yank current line
-ytx	# Yank up to and before character (x)	
-yfx	# Yank up to and including character (x)	
+yyy/Y		# Yank current line
+ytx		# Yank up to and before character (x)
+yfx		# Yank up to and including character (x)
 
 --- Searching ---
 
 /[word]		# Basic search
 /[word]\c	# Case insensitive search
 n		# Next occurance
+
+--- Navigating ---
+
+Shift-6 (^)	# Shift to beginning of line
+Shift-4	($)	# Shift to end of line
+Shift-W		# Shift forward a word
+Shift-B		# Shift back a word
+#-Shift-G	# Shift to line number
+Shift-G		# Shift to end of file
+
+--- Basic commands ---
+
+Shift-A 	# Navigate to end of line and enter insert mode
+o		# Open a line below and enter insert mode
+O		# Open a line above and enter insert mode
+dd		# Delete current line
+5dd		# Delete next 5 lines
+:%s/hi/Hi/g	# Global search and replace ((s)-entire file,(g)-every instance)
+:1,5s/hi/Hi/c	# Search and replace on first instance in next 5 lines (user confirmation)
+
+--- Editing multiple files ---
+
+:n		# Switch to next file
+:N 		# Switch to previous file

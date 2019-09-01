@@ -1,0 +1,35 @@
+kubectl get namespaces 
+kubectl get all -n policy-service
+kubectl completion -h
+source <(kubectl completion bash)
+kubectl get all -n policy-service 
+kubectl edit deployment echoserver 
+kubectl edit service echoserver 
+kubectl describe service echoserver
+kubectl run --rm -it -restart=Never --image=alpine alpine sh 
+kubectl run --rm -it --restart=Never --image=alpine alpine sh 
+kubectl expose deployment echoserver -- type=LoadBalancer 
+kubectl expose deployment echoserver --type=LoadBalancer 
+kubectl delete service echoserver 
+kubectl expose deployment echoserver --type=LoadBalancer 
+kubectl get all -n policy-service
+kubectl get service
+kubectl get service
+kubectl -o wide
+kubectl get -o wide
+kubectl api-resources
+kubectl get deployment
+kubectl get deployment echoserver
+kubectl get pods
+kubectl get pod echoserver-7d55dddbcb-8gqmx -o yaml
+kubectl get pods -o wide
+kubectl edit pod echoserver-7d55dddbcb-8gqmx
+kubectl edit pod echoserver8443-6f779c6c4f-cqxph
+kubectl expose deployment echoserver8443 --type=LoadBalancer 
+kubectl describe service/echoserver8443
+kubectl delete service/echoserver8443
+kubectl expose deployment echoserver8443 --type=LoadBalancer  --target-port=8443 --port=443
+watch -n1 kubectl get all
+watch -n1 kubectl get all -o wide
+kubectl describe service echoserver
+kubectl describe service echoserver8443
