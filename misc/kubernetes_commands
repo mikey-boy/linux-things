@@ -23,10 +23,6 @@ kubectl get deployment echoserver
 kubectl get pods
 kubectl get pod echoserver-7d55dddbcb-8gqmx -o yaml
 kubectl get pods -o wide
-kubectl edit pod echoserver-7d55dddbcb-8gqmx
-kubectl edit pod echoserver8443-6f779c6c4f-cqxph
-kubectl expose deployment echoserver8443 --type=LoadBalancer 
-kubectl describe service/echoserver8443
 kubectl delete service/echoserver8443
 kubectl expose deployment echoserver8443 --type=LoadBalancer  --target-port=8443 --port=443
 watch -n1 kubectl get all
