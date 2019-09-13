@@ -1,0 +1,42 @@
+#
+# Simple Linux Command Cheatsheet
+#
+
+
+#---- FILE SEARCHING ----#
+
+updatedb			# Make sure you run updatedb prior to using
+locate [filename]		# the locate command
+
+which [filename]		# Checks directories located in $PATH, returns full path
+
+find [dir] -name [filename]	# Recurively search. Regex allowed on filename
+
+
+#---- UPDATING SYSTEM ----#
+
+sudo apt-get update 		# Fetches list of available updates
+sudo apt-get upgrade		# Strictly upgrades the current packages
+sudo apt-get dist-upgrade	# Installs updates (new ones)
+
+sudo apt-get install [package]  # Installs the specified package
+sudo apt-get remove [package]   # Removes the specified package
+
+apt-cache search [package]	# Searches for package to be installed
+
+
+#---- SERVICES ----#
+
+systemctl start [service] 	# Start specified service
+systemctl enable [service]	# Start specified service at boot time
+
+
+#---- NETWORKING ----#
+
+netstat -antp			# Print all open sockets
+
+(sudo)
+iptables -L --line-numbers		# List all rules
+iptables -D [INPUT/OUTPUT] [linenum]	# Delete rule accorfing to linenum
+iptables -I [INPUT/OUTPUT] -s [addr] -j [ACCEPT/DROP] # Add rule
+

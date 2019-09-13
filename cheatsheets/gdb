@@ -1,0 +1,28 @@
+# Run
+gdb [executable]	# Loads executable into gdb
+run <args>		# Run the program, optional args
+kill			# Kill running program
+
+# Examine
+list [func]		# List src code of func
+disass [func]		# Dump assembly code of func
+info regs		# Show current values in registers
+backtrace		# Show call stack
+backtrace full		# Show call stack, also print local vars
+
+# Breakpoints
+break [func/line_num] 	# Break on function, or line number
+delete [breakpoint_num] # Delete specified breakpoint
+clear			# Delete all breakpoints
+
+# Variables
+print [var/reg/addr]	# Print content
+display [var/reg]	# Print content after each step
+x/[nfu] [address]	# Print memory
+
+# n - how many units to print
+# f - format character (x:hexidecimal, i:instruction)
+# u - units (b:byte, h:half-word, w:word(4 bytes))
+
+#i.e. x/16xw $esp
+

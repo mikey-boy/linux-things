@@ -1,0 +1,9 @@
+#!/bin/bash
+
+DOMAIN="google.ca"
+SUBDOMAINS="ftp mail owa proxy router store news maps video trends students"
+
+for subdomain in $SUBDOMAINS
+do
+	host $subdomain.$DOMAIN
+done

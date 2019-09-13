@@ -2,8 +2,8 @@
 
 Ctl-a	# Move to beginning of line
 Ctl-e 	# Move to end of line
-M-f	# Move forwards one word
-M-b	# Move backwards one word
+Alt-f	# Move forwards one word
+Alt-b	# Move backwards one word
 Ctl-l 	# Equivalent to 'clear'
 
 --- Kill/yank ---

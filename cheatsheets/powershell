@@ -1,0 +1,15 @@
+# Basic Commands
+
+echo
+gc 		# Get contents of file
+gsv		# Get services
+ls
+man
+mkdir
+mv
+ps		# Get running processes
+rm
+
+# Int to hex 
+
+'{0:X}' -f [integer]
