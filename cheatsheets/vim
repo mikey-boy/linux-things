@@ -20,6 +20,8 @@ yfx		# Yank up to and including character (x)
 /[word]		# Basic search
 /[word]\c	# Case insensitive search
 n		# Next occurance
+:%s/hi/Hi/g	# Global search and replace ((s)-entire file,(g)-every instance)
+:1,5s/hi/Hi/c	# Search and replace on first instance in next 5 lines (user confirmation)
 
 --- Navigating ---
 
@@ -37,10 +39,9 @@ o		# Open a line below and enter insert mode
 O		# Open a line above and enter insert mode
 dd		# Delete current line
 5dd		# Delete next 5 lines
-:%s/hi/Hi/g	# Global search and replace ((s)-entire file,(g)-every instance)
-:1,5s/hi/Hi/c	# Search and replace on first instance in next 5 lines (user confirmation)
 
 --- Editing multiple files ---
 
 :n		# Switch to next file
 :N 		# Switch to previous file
+:x		# Save and exit vim
