@@ -24,4 +24,4 @@ tmux attach -t [session_name]	# Attach from a session
 (prefix + ")	# Horizontal split
 (prefix + Dpad)	# Switch pane
 
-(prefix + :resize-pane -[D/U/L/R] [num_cells]) 	# Resizes pane by number of cells
+(prefix[hold] + Dpad) # Resize pane
