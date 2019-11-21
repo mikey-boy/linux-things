@@ -1,11 +1,8 @@
---- Updating sources ---
-
-wget -qO - [url_for_GPG_key] | sudo apt-key add - 	# Add gpg key for app
-
 --- Install apps ---
 
 sudo apt update			# Updates the package listing
-sudo apt install [app]		# Installs specified application
+sudo apt install [app/file.deb] # Installs specified application
+sudo apt upgrade		# Install latest version of software
 
 --- Removing apps ---
 
@@ -14,7 +11,7 @@ sudo apt autoremove		# Remove unused packages
 
 --- Other commands ---
 
-dpkg --list			# List all installed packages
-dpkg --install [pkg].deb	# Install package file
-sudo apt upgrade		# Install latest version of software
+wget -qO - [url_for_GPG_key] \
+	| sudo apt-key add - 	# Add gpg key for app
+apt --list			# List all installed packages
 apt-cache search [pkg]		# Get info on installed package

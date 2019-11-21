@@ -1,0 +1,19 @@
+# Examine
+dissas main		# Disassemble function
+disass /s main		# Disassemble function with mixed in source code
+disassble 'foo.c':bar	# Disassemble function bar in foo.c
+
+info functions		# List functions names
+info registers eflags	# Display current status flags
+
+layout asm		# Show assembly instructions being executed
+x/i $rip		# Examine current assembly instruction being executed
+
+# Breakpoints
+break filename:linenum	# Break on line in source file
+break *[addr]		# Break on address
+
+# View
+win info		# List windows and properties
+winheight [win] +-[sz]	# Adjust window height by sz
+focus [win]		# Allow scrolling for window

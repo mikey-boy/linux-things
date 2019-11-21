@@ -45,3 +45,8 @@ dd		# Delete current line
 :n		# Switch to next file
 :N 		# Switch to previous file
 :x		# Save and exit vim
+
+--- Hex view ---
+
+:%!xxd		# Switch to hex view
+:%!xxd -r 	# Switch back

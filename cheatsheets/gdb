@@ -15,9 +15,17 @@ break [func/line_num] 	# Break on function, or line number
 delete [breakpoint_num] # Delete specified breakpoint
 clear			# Delete all breakpoints
 
+# Continuing
+continue		# Continue normal execution 
+step			# Continue until program reaches next source line
+next			# Continue until next source line, allowing to enter functions
+stepi			# Execute one machine instruction and return to debugger
+nexti			# Execute one machine instruction, allowing to enter functions
+
 # Variables
 print [var/reg/addr]	# Print content
 display [var/reg]	# Print content after each step
+undisplay [code]	# Remove content from being displayed
 x/[nfu] [address]	# Print memory
 
 # n - how many units to print
