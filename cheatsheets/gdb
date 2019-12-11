@@ -1,6 +1,7 @@
 # Run
 gdb [executable]	# Loads executable into gdb
 run <args>		# Run the program, optional args
+run < [file]		# Run program, redirect file contents to stdin
 kill			# Kill running program
 
 # Examine
@@ -29,7 +30,7 @@ undisplay [code]	# Remove content from being displayed
 x/[nfu] [address]	# Print memory
 
 # n - how many units to print
-# f - format character (x:hexidecimal, i:instruction)
+# f - format character (x:hexidecimal, i:instruction, s:string, g:64bit words)
 # u - units (b:byte, h:half-word, w:word(4 bytes))
 
 #i.e. x/16xw $esp
