@@ -5,10 +5,13 @@ disassble 'foo.c':bar	# Disassemble function bar in foo.c
 
 info functions		# List functions names
 info registers eflags	# Display current status flags
+info break		# List all breakpoints, watchpoints, catchpoint
 
 x/i $rip		# Examine current assembly instruction being executed
 
 list -function [func]	# Examine data at function (useful with multiple windows)
+
+p [fnc]			# Get memory address of function
 
 # Breakpoints
 break filename:linenum	# Break on line in source file
@@ -20,3 +23,6 @@ win info		# List windows and properties
 winheight [win] +-[sz]	# Adjust window height by sz
 focus [win]		# Allow scrolling for window
 
+# Environments
+show environment [var]	# Show value of environment variable	
+set environment [v] [vl] # Set value of environment variable
