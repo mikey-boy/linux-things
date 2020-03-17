@@ -1,0 +1,28 @@
+--- networks servers channels ---
+
+/network list		list predefined networks
+/connect [network]	connect to specified network
+/add [network]		add specified network
+
+/server add -network [net] [channel]	add specified server
+/channel add [#channel] [net]		add specified channel
+/join [#channel]			join specified channel
+
+--- messaging ---
+
+/msg [nick] [message]	send a private message to user within current chat
+/query [nick]		start private conversation with user in new window
+/whois [nick]		get more infomation about a user
+
+--- navigation ---
+
+page-up			scroll up half a page
+page-down		scroll down half a page
+alt+a			navigate to window with most recent activity
+alt+[num] 		navigate to specified window
+
+/window goto [channel]	navigate to window w specified channel
+/window goto [nickname] navigate to window w /query nickname
+
+/hilight [nickname]	lines containing your nick are highlighted
+

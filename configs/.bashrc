@@ -112,4 +112,4 @@ fi
 PATH="$PATH:/usr/local/idafree-7.0/"
 
 # Load user-defined functions
-source .bash_fncs
+source ~/.bash_fncs
