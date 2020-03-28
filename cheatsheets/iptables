@@ -1,0 +1,13 @@
+--- General ---
+
+iptables -vnL		# List all rules for table, show in and out interface
+iptables -F		# Flush all rules for builtin chains
+
+--- Adding rules ---
+
+iptables -P [chain] [target]	# Set default filter policy
+
+iptables 	
+	-A [chain] 
+	-i [interface] 
+	-j [target]
