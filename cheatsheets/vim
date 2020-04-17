@@ -17,9 +17,10 @@ yfx		# Yank up to and including character (x)
 
 --- Searching ---
 
-/[word]		# Basic search
+/[word]		# Basic search (forward)
+?[word]     # Basic search (backward)
 /[word]\c	# Case insensitive search
-n		# Next occurance
+n, N		# Next occurance, previous occurance (depending on search direction)
 :%s/hi/Hi/g	# Global search and replace ((s)-entire file,(g)-every instance)
 :1,5s/hi/Hi/	# Search and replace on lines one to five
 

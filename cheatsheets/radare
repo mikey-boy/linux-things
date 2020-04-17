@@ -1,0 +1,21 @@
+--- Starting ---
+
+r2 -n [file]		# Open a file without parsing file format headers (won't use VA's)
+Ve 			# Edit configurations in visual mode
+
+--- Basic ---
+
+[c]?			# Print help for command
+[n][c]			# Run a command n times
+[c] | [c2]		# Pipe to standard unix tool
+dcu [fnc]		# Debug continue until function
+
+--- Analyze ---
+
+px/pd			# Print hexidecimal, disassembly, etc.
+
+--- Visual ---
+
+i			# Enter insert mode
+
+
