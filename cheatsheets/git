@@ -1,0 +1,10 @@
+--- new repository ---
+
+git init                            # Initialize git project 
+git remote add origin [url].git     # Add existing project
+
+--- merging ---
+
+git fetch origin                    # Update remote tracking branches
+git checkout -b [br] origin/[br]    # Checkout remote branch locally
+

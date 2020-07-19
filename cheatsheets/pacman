@@ -1,0 +1,9 @@
+--- Package Synchronization ---
+
+pacman -Syy             # Update package database
+pacman -Syu             # Full system upgrade
+pacman -R [package]     # Remove single package
+
+--- Misc ---
+
+pactree [package]       # List package dependencies
