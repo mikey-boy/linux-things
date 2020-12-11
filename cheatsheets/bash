@@ -6,6 +6,14 @@ simple(){
 	return 0
 }
 
+--- Arrays ---
+
+# Arrays can be defined like this
+arr=(foo bar)
+
+# And their values can be iterated over like this
+for i in "${arr[*]}"; do echo "$i"; done
+
 --- Loops ---
 
 # Iterate over a sequence of numbers

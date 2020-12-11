@@ -55,5 +55,7 @@ dd		# Delete current line
 
 --- Misc ---
 
+gg=G        # Auto-indents entire file
+=%          # If placed on open bracket, indents current code block
 :![command]	# Runs a command in shell environment without leaving vim
 

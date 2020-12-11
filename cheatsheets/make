@@ -1,0 +1,21 @@
+--- General ---
+
+target: dependency
+    command
+
+--- Macros ---
+
+$@          # Target
+$<          # First dependency
+
+--- Keywords ---
+
+patsubst    # pattern subsitute
+wildcard    # wildcard
+
+--- Examples ---
+
+cobjects = $(patsubst src/%.c,objects/%.o,$(wildcard src/*.c))
+
+bin/kernel.bin: src/linker.ld $(objects)
+    i686-elf-gcc -T $< -o $@ $(objects) $(LINKERPARAMS)
