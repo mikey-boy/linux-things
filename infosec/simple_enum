@@ -1,0 +1,52 @@
+#!/bin/bash
+
+RED='\033[0;31m'
+GRE='\033[0;32m'
+YEL='\033[0;33m'
+NC='\033[0m'
+
+#echo -e "${GRE}\n[+] \n${NC}"
+
+echo -e "${GRE}\n[+] Printing operating system information\n${NC}"
+uname -r
+cat /etc/*-release
+
+echo -e "${GRE}\n[+] Print any environment variables\n${NC}"
+echo -e "${YEL}Files to look at: 
+/etc/profile
+/etc/bashrc 
+~/.bash_profile 
+~/.bashrc 
+~/.bash_logout
+${NC}"
+env
+set
+
+echo -e "${GRE}\n[+] Print running processes\n${NC}"
+echo -e "${YEL}You can also run:
+ps aux
+ps -ef
+top
+cat /etc/services
+${NC}"
+ps -ejH
+
+echo -e "${GRE}\n[+] Print processes running as root (real and effective ID)\n${NC}"
+ps -U root -u root
+
+echo -e "${GRE}\n[+] Print application information\n${NC}"
+echo -e "${YEL}Check package manager:
+dpkg -l
+rpm -qa
+${NC}"
+
+echo -e "${YEL}Check bin directories:
+/usr/bin
+/bin
+/sbin
+etc.${NC}"
+
+echo -e "${GRE}\n[+] Check configuration files for interesting services\n${NC}"
+
+echo -e "${GRE}\n[+] Check crontabs\n${NC}"
+crontab -l
