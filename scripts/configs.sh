@@ -2,7 +2,7 @@
 
 # A script to setup my config files
 
-CONFIGS=".tmux.conf .bash_aliases .bash_fncs .bashrc .gdbinit"
+CONFIGS="$( ls -ap ~/linux-things/configs/ | grep -v / )"
 RED='\033[0;31m';GRE='\033[0;32m';YEL='\033[1;33m';NC='\033[0m';
 
 if [ ! -d ~/linux-things/configs ]; then
@@ -11,6 +11,7 @@ if [ ! -d ~/linux-things/configs ]; then
 fi
 
 mkdir /tmp/confs
+
 for conf in $CONFIGS; do
 	if [ -f ~/$conf ]; then
 		echo -e "${YEL}Found existing conf: $conf. Moving to /tmp/confs${NC}"
