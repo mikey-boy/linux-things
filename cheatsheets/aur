@@ -1,0 +1,14 @@
+--- Installing package ---
+
+1. Download PKGBUILD files from https://aur.archlinux.org/
+2. Verify that PKGBUILD and accompanying files are not malicious
+3. Run `makepkg -si` in the directory where the files are saved
+
+--- Upgrading packages ---
+
+1. `git pull` in the directory with PKGBUILD files
+2. `makepkg -si`
+
+--- References ---
+
+[1] https://wiki.archlinux.org/index.php/Arch_User_Repository

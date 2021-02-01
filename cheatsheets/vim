@@ -18,7 +18,7 @@ yfx		# Yank up to and including character (x)
 --- Searching ---
 
 /[word]		# Basic search (forward)
-?[word]     # Basic search (backward)
+?[word]         # Pattern search
 /[word]\c	# Case insensitive search
 n, N		# Next occurance, previous occurance (depending on search direction)
 :%s/hi/Hi/g	# Global search and replace ((s)-entire file,(g)-every instance)
@@ -58,4 +58,5 @@ dd		# Delete current line
 gg=G        # Auto-indents entire file
 =%          # If placed on open bracket, indents current code block
 :![command]	# Runs a command in shell environment without leaving vim
+:w !sudo tee %  # Writes to file with root priveleges
 

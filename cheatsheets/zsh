@@ -1,0 +1,15 @@
+----- Globbing patterns ------
+
+*           - any number of characters
+?           - any single character
+[123]
+[0-9]
+[::alpha::]
+[::alnum::]
+[::lower::]
+
+----- Arrays ----- 
+
+a=(*.sh)            - Create array with all files ending with .sh
+a=((file1*|file2*)) - Create array with files matching beginnings
+

@@ -12,6 +12,10 @@ tmux detach (prefix + d) 	# Detach from a session
 
 tmux attach -t [session_name]	# Attach from a session
 
+--- Within Session ---
+
+:attach-session -t . -c [dir]   # Change working directory within session
+
 ---- Windows ----
 
 (prefix + c)	# Create new window
