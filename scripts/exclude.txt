@@ -10,6 +10,7 @@
 /var/lib/dhcpcd/*
 
 /home/*/.cache
+/home/*/.mozilla
 /home/*/.local/share/Trash/*
 /home/*/lost+found
 /home/mike/git/serenity
