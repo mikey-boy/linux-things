@@ -15,6 +15,7 @@ tmux attach -t [session_name]	# Attach from a session
 --- Within Session ---
 
 :attach-session -t . -c [dir]   # Change working directory within session
+:swap-window -t 1 -s 3          # Swap windows 1 and 3
 
 ---- Windows ----
 

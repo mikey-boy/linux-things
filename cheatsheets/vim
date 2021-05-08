@@ -55,8 +55,10 @@ dd		# Delete current line
 
 --- Misc ---
 
-gg=G        # Auto-indents entire file
-=%          # If placed on open bracket, indents current code block
+:set paste      # Puts vim into paste mode
+:set nopaste    # Takes vim out of paste mode
+gg=G            # Auto-indents entire file
+=%              # If placed on open bracket, indents current code block
 :![command]	# Runs a command in shell environment without leaving vim
 :w !sudo tee %  # Writes to file with root priveleges
 
