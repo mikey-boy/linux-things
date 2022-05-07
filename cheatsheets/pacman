@@ -4,6 +4,12 @@ pacman -Syy             # Update package database
 pacman -Syu             # Full system upgrade
 pacman -R [package]     # Remove single package
 
+--- File Search ---
+
+pacman -F [filename]    # List all packages that contain this file
+pacman -Fl [package]    # List all files installed by this package
+pacman -Ql [package]    # List all files installed by this AUR package
+
 --- Misc ---
 
 pactree [package]       # List package dependencies
