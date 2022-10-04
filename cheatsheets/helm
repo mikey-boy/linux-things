@@ -1,0 +1,32 @@
+--- General ---
+
+# Add a chart repository
+helm repo add [URL]
+
+# Update all chart repos
+helm repo update
+
+# Search for a chart within a repo
+helm search repo [keyword]
+
+# Show the chart/values definition
+helm show chart [repo/chartname]
+helm show values [repo/chartname]
+
+# Download a chart, untar it
+helm pull [repo/chartname] --version [chart version] --untar
+
+--- Deployments ---
+
+# Deploy a chart
+helm install [release-name] [repo/chartname]
+
+# Upgrade a chart
+helm upgrade [release-name] [repo/chartname] --version [xx.yy.zz] -f [values-file] -n [namespace]
+
+# Show the status of a release
+helm list
+helm status [release]
+
+# Get the manifest of the installed release
+helm get manifest [release]
