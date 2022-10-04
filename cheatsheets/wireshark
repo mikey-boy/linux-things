@@ -1,0 +1,21 @@
+-- capture filters --
+
+# Capture traffic to and from a specific IP address
+host 172.8.5.4
+
+# Capture traffic to and from a range of IPs
+net 192.168.0.0/24
+
+# Capture traffic from a range of IPs
+src net 192.168.0.0/24
+
+# Capture only DNS traffic
+port 53
+
+# Reference
+https://wiki.wireshark.org/CaptureFilters
+
+
+-- display filters --
+
+

@@ -12,7 +12,7 @@ fi
 
 # Mount external drive
 echo "[+] Checking if external drive is mounted"
-if ! mount | grep rpi2:/external > /dev/null ; then
+if ! mount | grep /media/external > /dev/null ; then
     sudo mount /media/external || exit 1
 fi
 
