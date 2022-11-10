@@ -1,0 +1,8 @@
+--- security flags ---
+
+-fno-stack-protector    # disable stack canaries
+-no-pie                 # disable position independant executables
+-z execstack            # disable Data Execution Protection (NX)
+
+
+

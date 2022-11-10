@@ -8,7 +8,8 @@ pacman -R [package]     # Remove single package
 
 pacman -F [filename]    # List all packages that contain this file
 pacman -Fl [package]    # List all files installed by this package
-pacman -Ql [package]    # List all files installed by this AUR package
+pacman -Qo [filename]   # List which installed package owns this file
+pacman -Ql [package]    # List all files installed by this package
 
 --- Misc ---
 
