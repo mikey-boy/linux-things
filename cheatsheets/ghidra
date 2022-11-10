@@ -1,0 +1,14 @@
+--- Navigating ---
+
+Alt + Left              # Go backward in navigation history
+Alt + Right             # Go forward in navigation history
+g                       # Goto memory address, label, expression
+
+--- Views ---
+
+Ctrl + Shift + F         # Show all function references
+
+--- Labeling ---
+
+l                       # Rename the selected function
+
