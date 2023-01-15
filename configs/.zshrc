@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Save command history
 HISTFILE=~/.histfile
 HISTSIZE=1000
@@ -5,11 +12,12 @@ SAVEHIST=1000
 
 export LANG=en_US.UTF-8
 
-# Bash style comments
-setopt interactivecomments
-
-# Extended glob support
-setopt extendedglob
+setopt autocd               # Change directory just by typing name
+setopt interactivecomments  # Bash style comments
+setopt extendedglob         # Extended glob support
+setopt numericglobsort      # Sort filenames numerically when it makes sense
+setopt promptsubst          # Enable command substitution in prompt
+#setopt shwordsplit         # Perform wordsplitting (into arrays) on shell variables 
 
 bindkey -v
 export KEYTIMEOUT=1
@@ -72,11 +80,25 @@ if [ -f ~/.bash_fncs ]; then
 fi
 
 # Update PATH
-export PATH="$PATH:/opt/android-studio/jre/bin"     # Android Studio
-export PATH="$PATH:$HOME/opt/cross/bin"             # OS development (cross-compilers)
+export PATH="$PATH:/opt/android-studio/jre/bin"                 # Android Studio
+export PATH="$PATH:$HOME/opt/cross/bin"                         # OS development (cross-compilers)
+export PATH="$PATH:/home/mike/.local/share/gem/ruby/3.0.0/bin"  # Ruby gems
+export PATH="$PATH:$HOME/go/bin"                                # Golang binaries
+
+# Update go-specific environment variables
+export GOBIN="$HOME/go/bin"
+export GOPATH="$HOME/go/"
+
+# Update Ruby specific environment variables
+export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+export PATH="$PATH:$GEM_HOME/bin"
 
 # Enable git prompt
 source ~/aur/git-prompt.zsh/src/git-prompt.zsh-2.2.1/git-prompt.zsh
+
+# Kubernetes exports
+export do=(--dry-run=client -o yaml)
+export now=(--force --grace-period 0)
 
 # Various key bindings
 # create a zkbd compatible hash;
@@ -126,5 +148,9 @@ precmd() {
 }
 
 
-PROMPT='%(?..%F{red}%? )%f%B%F{151}%~%f%b : '
-RPROMPT='$(gitprompt)'
+#PROMPT='%(?..%F{red}%? )%f%B%F{151}%~%f%b : '
+#RPROMPT='$(gitprompt)'
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

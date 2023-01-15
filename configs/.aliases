@@ -1,9 +1,14 @@
+alias refresh='lxpanelctl restart && openbox --restart'
+alias ll='ls -l'
+alias la='ls -A'
+alias objdump='objdump -M intel'
+alias android='/opt/android-studio/bin/studio.sh'
 alias xclip="xclip -selection clipboard"
-alias objdump="objdump -M intel"
-alias xclip="xclip -selection clipboard"
-alias control_panel="~/Desktop/oscp/labs/scripts/control_panel.sh"
-alias windows="~/Desktop/oscp/labs/scripts/windows10.sh"
-alias debian="~/Desktop/oscp/labs/scripts/debian.sh"
+alias checksec='pwn checksec'
+alias docker='sudo docker'
+alias k='kubectl'
+alias kn='kubectl config set-context --current --namespace '
+alias kdbg='kubectl run --image busybox --attach debugger -it --rm'
 
 #################
 # Docker
