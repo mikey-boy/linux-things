@@ -1,7 +1,0 @@
-'atom-workspace atom-text-editor':
-  'alt-shift-right': 'window:focus-pane-on-right'
-  'alt-shift-left': 'window:focus-pane-on-left'
-
-'.tree-view':
-  'alt-shift-right': 'window:focus-pane-on-right'
-  'alt-shift-left': 'window:focus-pane-on-left'
