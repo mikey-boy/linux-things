@@ -1,0 +1,5 @@
+--- Editing ---
+
+Alt + Shift + [Up/Down]     # Multiline select up or down
+Alt + Shift + LClick        # Multiline select on cursor
+Ctrl + Shift + L            # Multiline select on current selected word

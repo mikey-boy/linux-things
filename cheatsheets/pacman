@@ -3,13 +3,19 @@
 pacman -Syy             # Update package database
 pacman -Syu             # Full system upgrade
 pacman -R [package]     # Remove single package
+pacman -Rs [package]    # Remove each target specified including all of their dependencies,
+                        # provided that (A) they are not required by other packages; and (B)
+                        # they were not explicitly installed by the user.
+
+pacman -U /var/cache/pacman/pkg/package-old_version.pkg.tar.type    # Downgrade to an older package version stored in cache
+
 
 --- File Search ---
 
 pacman -F [filename]    # List all packages that contain this file
-pacman -Fl [package]    # List all files installed by this package
+pacman -Fl [package]    # List all files installed by this package. Package must be installed
 pacman -Qo [filename]   # List which installed package owns this file
-pacman -Ql [package]    # List all files installed by this package
+pkgfile -l [package]    # List all files installed by this package. Package does not need to be installed
 
 --- Misc ---
 

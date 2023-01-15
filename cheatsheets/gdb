@@ -1,5 +1,9 @@
+--- Vanilla GDB ---
+
 # Run
-gdb [executable]	# Loads executable into gdb
+gdb [bin]       	# Loads executable into gdb
+gdb --args [bin] [args] # Pass arguments to inferior process 
+gdb -nx                 # Disable the commands from the ~/.gdbinit to be executed
 run <args>		# Run the program, optional args
 run < [file]		# Run program, redirect file contents to stdin
 kill			# Kill running program
@@ -34,4 +38,9 @@ x/[nfu] [address]	# Print memory
 # u - units (b:byte, h:half-word, w:word(4 bytes))
 
 #i.e. x/16xw $esp
+
+
+--- GEF ---
+
+xinfo [addr]            # Memory attributes at a given address
 

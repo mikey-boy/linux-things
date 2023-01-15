@@ -1,0 +1,3 @@
+--- Tricks ---
+
+... | tr -s ' ' | cut -d' '         # Squash whitespace before passing to cut, makes it easier for -f flag
