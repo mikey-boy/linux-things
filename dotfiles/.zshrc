@@ -132,24 +132,6 @@ if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
     add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
 fi
 
-new_line_before_prompt=yes
-precmd() {
-    # Print the previously configured title    
-    print -Pnr -- "$TERM_TITLE"
-
-    # Print the previously configured title    
-    if [ "$new_line_before_prompt" = yes ]; then
-        if [ -z "$_NEW_LINE_BEFORE_PROMPT" ]; then
-            _NEW_LINE_BEFORE_PROMPT=1
-        else
-            print ""
-        fi
-    fi
-}
-
-
-#PROMPT='%(?..%F{red}%? )%f%B%F{151}%~%f%b : '
-#RPROMPT='$(gitprompt)'
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
