@@ -9,6 +9,11 @@ alias docker='sudo docker'
 alias k='kubectl'
 alias kn='kubectl config set-context --current --namespace '
 alias kdbg='kubectl run --image busybox --attach debugger -it --rm'
+alias gs='git status'
+alias gb='git branch'
+alias gc='git commit'
+alias gau='git add -u'
+alias sv='source .venv/bin/activate'
 
 ###################
 # Docker

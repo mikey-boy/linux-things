@@ -2,7 +2,7 @@
 
 crypted="/media/external/crypted"
 backup_dir="/media/veracrypt1/important"
-targets=("/home/mike/.keepass/passwords.kdbx" "/home/mike/pwn/nightmare" "/home/mike/notes" "/home/mike/Desktop/important-docs")
+targets=("/home/mike/.keepass/passwords.kdbx" "/home/mike/pwn" "/home/mike/notes" "/home/mike/Desktop/important-docs")
 auto=0
 
 # Check if user wants to auto close container/mount after backup
@@ -29,17 +29,17 @@ fi
 # Backup files using rsync
 
 # Show user which files have been changed
-echo "[+] These are the files that have been changed:"
-for file in "${targets[@]}"; do
-    leaf="$( echo ${file} | rev | cut -d'/' -f1 | rev )"
-    sudo rsync -aAXHivcn "${file}" "${backup_dir}"
-done
+#echo "[+] These are the files that have been changed:"
+#for file in "${targets[@]}"; do
+#    leaf="$( echo ${file} | rev | cut -d'/' -f1 | rev )"
+#    sudo rsync -aAXHivcn "${file}" "${backup_dir}"
+#done
 
 read -p "[!] Do you want to proceed with the backup [Y/n]? " usr
 if [ -z $usr ] || [ $usr = "Y" ] || [ "$usr" = "y" ]; then
     for file in "${targets[@]}"; do
         leaf="$( echo ${file} | rev | cut -d'/' -f1 | rev )"
-        sudo rsync -aAXHSvc "${file}" "${backup_dir}"
+        sudo rsync -aAXHSvc --delete "${file}" "${backup_dir}"
     done
 fi
 

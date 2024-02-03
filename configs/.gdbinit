@@ -7,9 +7,11 @@
 # tmux-setup
 
 # My gdb settings
-set disassembly-flavor intel
-layout asm
-focus cmd
+#set disassembly-flavor intel
+#layout asm
+#focus cmd
 #layout split
-winheight asm +3
-refresh
+#winheight asm +3
+#refresh
+
+source ~/tools/peda/peda.py

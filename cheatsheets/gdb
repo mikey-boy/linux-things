@@ -12,20 +12,25 @@ kill			# Kill running program
 list [func]		# List src code of func
 disass [func]		# Dump assembly code of func
 info regs		# Show current values in registers
+info b                  # Show breakpoints
 backtrace		# Show call stack
 backtrace full		# Show call stack, also print local vars
 
 # Breakpoints
 break [func/line_num] 	# Break on function, or line number
+watch *[addr]           # Break on a particular memory address for write access
+rwatch *[addr]          # Break on a particular memory address for read access
+awatch *[addr]          # Break on a particular memory address for read/write access
 delete [breakpoint_num] # Delete specified breakpoint
 clear			# Delete all breakpoints
 
 # Continuing
 continue		# Continue normal execution 
-step			# Continue until program reaches next source line
-next			# Continue until next source line, allowing to enter functions
-stepi			# Execute one machine instruction and return to debugger
-nexti			# Execute one machine instruction, allowing to enter functions
+next			# Continue until program reaches next source line
+step			# Continue until next source line, allowing to enter functions
+nexti			# Execute one machine instruction and return to debugger
+stepi			# Execute one machine instruction, allowing to enter functions
+finish                  # Execute until the current function returns
 
 # Variables
 print [var/reg/addr]	# Print content
@@ -43,4 +48,5 @@ x/[nfu] [address]	# Print memory
 --- GEF ---
 
 xinfo [addr]            # Memory attributes at a given address
+search-pattern [bytes]  # Search bytes in memory
 
