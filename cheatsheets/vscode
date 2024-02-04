@@ -1,3 +1,16 @@
+--- View ---
+
+Super + Alt + Up            # Maximize panel
+Ctrl + W                    # Close Editor
+
+
+--- Navigating ---
+
+Ctrl + P                    # Open any file by name
+Ctrl + Alt + -              # Navigate backwards in editor
+Ctrl + Shift + -            # Navigate forwards in editor
+F12                         # Go to the definition
+
 --- Editing ---
 
 Alt + Shift + [Up/Down]     # Multiline select up or down

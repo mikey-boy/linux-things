@@ -12,5 +12,11 @@ sudo apt autoremove		# Remove unused packages
 --- Information ---
 
 apt list --installed		# List installed packages
-apt-cache show [pkg]		# List extra info for app
-apt-cache search [pkg]		# Get info on installed package
+apt show [pkg]		        # List extra info for app
+apt search [pkg]		# Get info on installed package
+
+-- Related tools ---
+
+ldconfig -p                     # Print a list of libraries installed on the system
+apt-file search [filename]      # List which package a file belongs to
+dpkg -L [pkg]                   # List the files installed by a package

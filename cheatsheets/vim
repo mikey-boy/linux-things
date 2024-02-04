@@ -24,6 +24,7 @@ n, N		# Next occurance, previous occurance (depending on search direction)
 *               # Search word under the cursor
 :%s/hi/Hi/g	# Global search and replace ((s)-entire file,(g)-every instance)
 :1,5s/hi/Hi/	# Search and replace on lines one to five
+:.,$s/hi/Hi/gc  # Search and replace from current line to end with confirmation
 
 --- Navigating ---
 
@@ -41,6 +42,10 @@ o		# Open a line below and enter insert mode
 O		# Open a line above and enter insert mode
 dd		# Delete current line
 5dd		# Delete next 5 lines
+
+--- Editing ---
+
+Shift-i         # Edit multiple lines (from visual block mode)
 
 --- Editing multiple files ---
 

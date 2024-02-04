@@ -1,0 +1,19 @@
+-- Building --
+
+docker build . -t <tag> 
+
+-- Running --
+
+docker run --rm                       # Run a container, delete it after closing
+  -t                                  # Allocate pseudo-tty (for output of process)
+  -v <host-vol>:<container-vol>       # Mount volumes b/w host and container
+  -p <host-port>:<container-port>     # Map ports b/w host and container
+  <container>
+
+docker exec -it <container> <process> # Attach and execute process in container  
+
+-- Cleanup --
+
+docker rm -vf $(docker ps -aq)        # Delete all containers, including volumes
+docker rmi -f $(docker images -aq)    # Delete all images
+

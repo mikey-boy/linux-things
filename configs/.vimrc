@@ -16,7 +16,7 @@ set numberwidth=2
 highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
 
 " Suggested line length
-"set colorcolumn=80
+set colorcolumn=80
 highlight colorcolumn ctermbg=lightred
 
 " Programming
