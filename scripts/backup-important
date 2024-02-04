@@ -35,12 +35,12 @@ fi
 
 # Backup local files that are newer
 for f in "${targets[@]}"; do
-    rsync -aAXHSRvcu "${user_home}/./${f}" "${container_unencrypted}"
+    rsync -aAXHSRvu "${user_home}/./${f}" "${container_unencrypted}"
 done
 
 # Synchronize remote files that are newer
 for f in "${targets[@]}"; do
-    rsync -aAXHSRvcu "${container_unencrypted}/./${f}" "${user_home}"
+    rsync -aAXHSRvu "${container_unencrypted}/./${f}" "${user_home}"
 done
 
 # ~~~~~~~~~~~~~~~ unmounting ~~~~~~~~~~~~~~~~~~~~~~~~
