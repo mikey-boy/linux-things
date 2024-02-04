@@ -20,12 +20,12 @@ setopt numericglobsort      # Sort filenames numerically when it makes sense
 setopt promptsubst          # Enable command substitution in prompt
 #setopt shwordsplit         # Perform wordsplitting (into arrays) on shell variables 
 
-# Ctrl + R for search history
-bindkey "^R" history-incremental-search-backward
-
 # Configure vim editing
 bindkey -v
 export KEYTIMEOUT=5
+
+# Ctrl + R for search history
+bindkey "^R" history-incremental-search-backward
 
 # Updates autocomplete for new installs
 zstyle :compinstall filename '/home/mike/.zshrc'
@@ -43,12 +43,12 @@ key[Control-Left]="${terminfo[kLFT5]}"
 key[Control-Right]="${terminfo[kRIT5]}"
 
 # setup key accordingly
-[[ -n "${key[Home]}"      ]] && bindkey -- "${key[Home]}"       beginning-of-line
-[[ -n "${key[End]}"       ]] && bindkey -- "${key[End]}"        end-of-line
-[[ -n "${key[Insert]}"    ]] && bindkey -- "${key[Insert]}"     overwrite-mode
-[[ -n "${key[Backspace]}" ]] && bindkey -- "${key[Backspace]}"  backward-delete-char
-[[ -n "${key[Delete]}"    ]] && bindkey -- "${key[Delete]}"     delete-char
-[[ -n "${key[Control-Left]}"  ]] && bindkey -- "${key[Control-Left]}"  backward-word
+[[ -n "${key[End]}" ]] && bindkey -- "${key[End]}" end-of-line
+[[ -n "${key[Home]}" ]] && bindkey -- "${key[Home]}" beginning-of-line
+[[ -n "${key[Insert]}" ]] && bindkey -- "${key[Insert]}" overwrite-mode
+[[ -n "${key[Delete]}" ]] && bindkey -- "${key[Delete]}" delete-char
+[[ -n "${key[Backspace]}" ]] && bindkey -- "${key[Backspace]}" backward-delete-char
+[[ -n "${key[Control-Left]}" ]] && bindkey -- "${key[Control-Left]}" backward-word
 [[ -n "${key[Control-Right]}" ]] && bindkey -- "${key[Control-Right]}" forward-word
 
 # ~~~~~~~~~~~~~~~ Aliases ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -58,7 +58,8 @@ alias v='nvim'
 #alias vim='nvim'
 
 # cd
-alias lt='cd ~/linux-things'
+alias lt='cd $HOME/linux-things'
+alias config='cd $HOME/.config'
 
 # ls
 alias ls='ls --color=auto'

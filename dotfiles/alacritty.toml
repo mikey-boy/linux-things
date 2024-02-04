@@ -3,10 +3,10 @@
 import = ["/home/mike/.config/alacritty/alacritty-theme/themes/gruvbox_dark.toml"]
 
 [font]
-size = 13
+size = 16
 
-#[font.normal]
-#family = "Ubuntu Nerd Font"
+[font.normal]
+family = "UbuntuMono Nerd Font"
 
 [window]
 decorations = "none"
