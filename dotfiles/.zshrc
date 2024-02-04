@@ -5,12 +5,13 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Save command history
+# ~~~~~~~~~~~~~~~ History ~~~~~~~~~~~~~~~~~~~~~~~~
+
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 
-export LANG=en_US.UTF-8
+# ~~~~~~~~~~~~~~~ ZSH configuration ~~~~~~~~~~~~~~~~~~~~~~~~
 
 setopt autocd               # Change directory just by typing name
 setopt interactivecomments  # Bash style comments
@@ -19,92 +20,20 @@ setopt numericglobsort      # Sort filenames numerically when it makes sense
 setopt promptsubst          # Enable command substitution in prompt
 #setopt shwordsplit         # Perform wordsplitting (into arrays) on shell variables 
 
+# Ctrl + R for search history
+bindkey "^R" history-incremental-search-backward
+
+# Configure vim editing
 bindkey -v
-export KEYTIMEOUT=1
+export KEYTIMEOUT=5
 
 # Updates autocomplete for new installs
 zstyle :compinstall filename '/home/mike/.zshrc'
 autoload -Uz compinit
 compinit
 
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
-esac
-
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-        # We have color support; assume it's compliant with Ecma-48
-        # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-        # a case would tend to support setf rather than setaf.)
-        color_prompt=yes
-    else
-        color_prompt=
-    fi
-fi
-
-# Ctrl + R for search history
-bindkey "^R" history-incremental-search-backward
-
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    alias dir='dir --color=auto'
-    alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-
-    export LESS_TERMCAP_mb=$'\E[1;31m'     # begin blink
-    export LESS_TERMCAP_md=$'\E[1;36m'     # begin bold
-    export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
-    export LESS_TERMCAP_so=$'\E[01;33m'    # begin reverse video
-    export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
-    export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
-    export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
-fi
-
-# Colored GCC warnings and errors
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# Alias definitions.
-if [ -f ~/.aliases ]; then
-    . ~/.aliases
-fi
-
-# Load user-defined functions
-if [ -f ~/.bash_fncs ]; then
-    . ~/.bash_fncs
-fi
-
-# Update PATH
-export PATH="$PATH:/opt/android-studio/jre/bin"                 # Android Studio
-export PATH="$PATH:$HOME/opt/cross/bin"                         # OS development (cross-compilers)
-export PATH="$PATH:/home/mike/.local/share/gem/ruby/3.0.0/bin"  # Ruby gems
-export PATH="$PATH:$HOME/go/bin"                                # Golang binaries
-
-# Update go-specific environment variables
-export GOBIN="$HOME/go/bin"
-export GOPATH="$HOME/go/"
-
-# Update Ruby specific environment variables
-export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
-export PATH="$PATH:$GEM_HOME/bin"
-
-# Enable git prompt
-source ~/aur/git-prompt.zsh/src/git-prompt.zsh-2.2.1/git-prompt.zsh
-
-# Kubernetes exports
-export do=(--dry-run=client -o yaml)
-export now=(--force --grace-period 0)
-
 # Various key bindings
-# create a zkbd compatible hash;
-# to add other keys to this hash, see: man 5 terminfo
 typeset -g -A key
-
 key[Home]="${terminfo[khome]}"
 key[End]="${terminfo[kend]}"
 key[Insert]="${terminfo[kich1]}"
@@ -122,17 +51,109 @@ key[Control-Right]="${terminfo[kRIT5]}"
 [[ -n "${key[Control-Left]}"  ]] && bindkey -- "${key[Control-Left]}"  backward-word
 [[ -n "${key[Control-Right]}" ]] && bindkey -- "${key[Control-Right]}" forward-word
 
-# Finally, make sure the terminal is in application mode, when zle is
-# active. Only then are the values from $terminfo valid.
-if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
-    autoload -Uz add-zle-hook-widget
-    function zle_application_mode_start { echoti smkx }
-    function zle_application_mode_stop { echoti rmkx }
-    add-zle-hook-widget -Uz zle-line-init zle_application_mode_start
-    add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
-fi
+# ~~~~~~~~~~~~~~~ Aliases ~~~~~~~~~~~~~~~~~~~~~~~~
 
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+# neovim
+alias v='nvim'
+#alias vim='nvim'
+
+# cd
+alias lt='cd ~/linux-things'
+
+# ls
+alias ls='ls --color=auto'
+alias ll='ls -l'
+alias la='ls -A'
+
+# Github
+alias gs='git status'
+alias gb='git branch'
+alias gc='git commit'
+alias gau='git add -u'
+
+# Docker
+alias docker='sudo docker'
+alias dockershell="docker run --rm -i -t --entrypoint=/bin/bash"
+alias dockershellsh="docker run --rm -i -t --entrypoint=/bin/sh"
+
+# Kubernetes
+alias k='kubectl'
+alias kn='kubectl config set-context --current --namespace '
+alias kdbg='kubectl run --image busybox --attach debugger -it --rm'
+
+# Misc
+alias objdump='objdump -M intel'
+alias xclip="xclip -selection clipboard"
+alias sv='source .venv/bin/activate'
+alias grep='grep --color=auto'
+alias sz='source ~/.zshrc'
+alias c='clear'
+alias e='exit'
+alias t='tmux'
+
+# ~~~~~~~~~~~~~~~ Environment Variables ~~~~~~~~~~~~~~~~~~~~~~~~
+
+# Kubernetes
+export do=(--dry-run=client -o yaml)
+export now=(--force --grace-period 0)
+
+# Less
+export LESS_TERMCAP_mb=$'\E[1;31m'     # begin blink
+export LESS_TERMCAP_md=$'\E[1;36m'     # begin bold
+export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
+export LESS_TERMCAP_so=$'\E[01;33m'    # begin reverse video
+export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
+export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
+export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
+
+# Colored GCC warnings and errors
+export GCC_COLORS='error=02;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# ~~~~~~~~~~~~~~~ Functions ~~~~~~~~~~~~~~~~~~~~~~~~
+
+function dockershellhere() {
+    dirname=${PWD##*/}
+    docker run --rm -it --entrypoint=/bin/bash -v `pwd`:/${dirname} -w /${dirname} "$@"
+}
+
+function dockershellshhere() {
+    dirname=${PWD##*/}
+    docker run --rm -it --entrypoint=/bin/sh -v `pwd`:/${dirname} -w /${dirname} "$@"
+}
+
+function cheat {
+        if [ "$1" = "-l" ]; then                    # list user cheatsheets
+                ls ~/linux-things/cheatsheets/
+        elif [ "$1" = "-li" ]; then                 # list image cheatsheets
+                ls ~/linux-things/cheatsheets/imgs/
+        elif [ "$1" = "-e" ]; then                  # create/edit cheatsheet
+                vim ~/linux-things/cheatsheets/$2
+        elif [ "$1" = "-i" ]; then                  # open image cheatsheet
+                xdg-open ~/linux-things/cheatsheets/imgs/$2
+        else
+                cat ~/linux-things/cheatsheets/$1
+        fi
+}
+
+# ~~~~~~~~~~~~~~~ PATH ~~~~~~~~~~~~~~~~~~~~~~~~
+
+# Update PATH
+export PATH="$PATH:/opt/android-studio/jre/bin"                 # Android Studio
+export PATH="$PATH:$HOME/opt/cross/bin"                         # OS development (cross-compilers)
+export PATH="$PATH:/home/mike/.local/share/gem/ruby/3.0.0/bin"  # Ruby gems
+export PATH="$PATH:$HOME/go/bin"                                # Golang binaries
+
+# Update go-specific environment variables
+export GOBIN="$HOME/go/bin"
+export GOPATH="$HOME/go/"
+
+# Update Ruby specific environment variables
+export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+export PATH="$PATH:$GEM_HOME/bin"
+
+# ~~~~~~~~~~~~~~~ Powerlevel10k ~~~~~~~~~~~~~~~~~~~~~~~~
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+

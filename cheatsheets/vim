@@ -31,7 +31,6 @@ Shift-6 (^)	# Shift to beginning of line
 Shift-4	($)	# Shift to end of line
 Shift-W		# Shift forward a word
 Shift-B		# Shift back a word
-#-Shift-G	# Shift to line number
 Shift-G		# Shift to end of file
 
 --- Basic commands ---
@@ -42,13 +41,6 @@ O		# Open a line above and enter insert mode
 dd		# Delete current line
 5dd		# Delete next 5 lines
 
---- Editing multiple files ---
-
--O		# Start vim with horizontally split pane
-:n		# Switch to next file
-:N 		# Switch to previous file
-:x		# Save and exit vim
-
 --- Hex view ---
 
 :%!xxd		# Switch to hex view
@@ -56,10 +48,6 @@ dd		# Delete current line
 
 --- Misc ---
 
-:set paste      # Puts vim into paste mode
-:set nopaste    # Takes vim out of paste mode
 gg=G            # Auto-indents entire file
 =%              # If placed on open bracket, indents current code block
-:![command]	# Runs a command in shell environment without leaving vim
-:w !sudo tee %  # Writes to file with root priveleges
 
