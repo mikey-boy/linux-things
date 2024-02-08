@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ "$1" = "-l" ]; then                    
+        ls ~/linux-things/cheatsheets       # list cheatsheets
+elif [ "$1" = "-e" ]; then                  
+        vim ~/linux-things/cheatsheets/$2   # create/edit cheatsheet
+else
+        cat ~/linux-things/cheatsheets/$1   # display cheatsheet
+fi
+

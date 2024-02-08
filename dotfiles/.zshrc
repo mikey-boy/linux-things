@@ -5,6 +5,18 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# ~~~~~~~~~~~~~~~ Environment Variables ~~~~~~~~~~~~~~~~~~~~~~~~
+
+# Misc
+export LT="$HOME/linux-things"
+
+# Kubernetes
+export do=(--dry-run=client -o yaml)
+export now=(--force --grace-period 0)
+
+# Colored GCC warnings and errors
+export GCC_COLORS='error=02;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
 # ~~~~~~~~~~~~~~~ History ~~~~~~~~~~~~~~~~~~~~~~~~
 
 HISTFILE=~/.histfile
@@ -58,13 +70,12 @@ alias v='nvim'
 #alias vim='nvim'
 
 # linux things
-alias lt='cd $HOME/linux-things'
-alias lt-backup='sudo $HOME/linux-things/scripts/backup-important'
+alias lt='cd $LT'
 
 # ls
 alias ls='ls --color=auto'
 alias ll='ls -l'
-alias la='ls -A'
+alias lsd='ls -l -t'
 
 # Github
 alias gs='git status'
@@ -94,50 +105,6 @@ alias c='clear'
 alias e='exit'
 alias t='tmux'
 
-# ~~~~~~~~~~~~~~~ Environment Variables ~~~~~~~~~~~~~~~~~~~~~~~~
-
-# Kubernetes
-export do=(--dry-run=client -o yaml)
-export now=(--force --grace-period 0)
-
-# Less
-export LESS_TERMCAP_mb=$'\E[1;31m'     # begin blink
-export LESS_TERMCAP_md=$'\E[1;36m'     # begin bold
-export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
-export LESS_TERMCAP_so=$'\E[01;33m'    # begin reverse video
-export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
-export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
-export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
-
-# Colored GCC warnings and errors
-export GCC_COLORS='error=02;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# ~~~~~~~~~~~~~~~ Functions ~~~~~~~~~~~~~~~~~~~~~~~~
-
-function dockershellhere() {
-    dirname=${PWD##*/}
-    docker run --rm -it --entrypoint=/bin/bash -v `pwd`:/${dirname} -w /${dirname} "$@"
-}
-
-function dockershellshhere() {
-    dirname=${PWD##*/}
-    docker run --rm -it --entrypoint=/bin/sh -v `pwd`:/${dirname} -w /${dirname} "$@"
-}
-
-function cheat {
-        if [ "$1" = "-l" ]; then                    # list user cheatsheets
-                ls ~/linux-things/cheatsheets/
-        elif [ "$1" = "-li" ]; then                 # list image cheatsheets
-                ls ~/linux-things/cheatsheets/imgs/
-        elif [ "$1" = "-e" ]; then                  # create/edit cheatsheet
-                vim ~/linux-things/cheatsheets/$2
-        elif [ "$1" = "-i" ]; then                  # open image cheatsheet
-                xdg-open ~/linux-things/cheatsheets/imgs/$2
-        else
-                cat ~/linux-things/cheatsheets/$1
-        fi
-}
-
 # ~~~~~~~~~~~~~~~ PATH ~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Update PATH
@@ -145,6 +112,7 @@ export PATH="$PATH:/opt/android-studio/jre/bin"                 # Android Studio
 export PATH="$PATH:$HOME/opt/cross/bin"                         # OS development (cross-compilers)
 export PATH="$PATH:/home/mike/.local/share/gem/ruby/3.0.0/bin"  # Ruby gems
 export PATH="$PATH:$HOME/go/bin"                                # Golang binaries
+export PATH="$PATH:$LT/scripts"                                 # Custom scripts
 
 # Update go-specific environment variables
 export GOBIN="$HOME/go/bin"

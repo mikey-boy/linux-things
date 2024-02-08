@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Change the alacritty theme
+sed -i -e 's/gruvbox_light.toml/gruvbox_dark.toml/g' $LT/dotfiles/alacritty.toml
+
+# Change the browser theme
+find ~/.mozilla -name user.js -exec \
+    sed -i -e 's/user_pref("layout.css.prefers-color-scheme.content-override", 1);/user_pref("layout.css.prefers-color-scheme.content-override", 0);/' {} \;

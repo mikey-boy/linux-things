@@ -1,0 +1,4 @@
+#!/bin/bash
+
+IFS="+"
+xdg-open "https://duckduckgo.com/?q=$*"
