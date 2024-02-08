@@ -28,31 +28,24 @@ n, N		# Next occurance, previous occurance (depending on search direction)
 
 --- Navigating ---
 
+h j k l         # Left Down Up Right
 Shift-6 (^)	# Shift to beginning of line
 Shift-4	($)	# Shift to end of line
+Shift-g         # Shift to beginning of file
+Shift-G		# Shift to end of file
+Ctrl-F          # Shift forward a page
+Ctrl-B          # Shift backward a page
 Shift-W		# Shift forward a word
 Shift-B		# Shift back a word
-#-Shift-G	# Shift to line number
-Shift-G		# Shift to end of file
 
---- Basic commands ---
+--- Editing ---
 
+Shift-i         # Edit multiple lines (from visual block mode)
 Shift-A 	# Navigate to end of line and enter insert mode
 o		# Open a line below and enter insert mode
 O		# Open a line above and enter insert mode
 dd		# Delete current line
 5dd		# Delete next 5 lines
-
---- Editing ---
-
-Shift-i         # Edit multiple lines (from visual block mode)
-
---- Editing multiple files ---
-
--O		# Start vim with horizontally split pane
-:n		# Switch to next file
-:N 		# Switch to previous file
-:x		# Save and exit vim
 
 --- Hex view ---
 
@@ -61,10 +54,6 @@ Shift-i         # Edit multiple lines (from visual block mode)
 
 --- Misc ---
 
-:set paste      # Puts vim into paste mode
-:set nopaste    # Takes vim out of paste mode
 gg=G            # Auto-indents entire file
 =%              # If placed on open bracket, indents current code block
-:![command]	# Runs a command in shell environment without leaving vim
-:w !sudo tee %  # Writes to file with root priveleges
 

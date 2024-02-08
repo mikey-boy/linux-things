@@ -1,27 +1,23 @@
 --- Sessions ---
 
 tmux new -s [session_name] 	# Creates a new session
-
 tmux list-sessions		# List existing tmux sessions
-
 tmux switch -t [session_name]	# Switch to existing session
-
 tmux kill-session -t [session]  # Kill a session
-
 tmux detach (prefix + d) 	# Detach from a session
-
 tmux attach -t [session_name]	# Attach from a session
 
 --- Within Session ---
 
 :attach-session -t . -c [dir]   # Change working directory within session
-:swap-window -t 1 -s 3          # Swap windows 1 and 3
 
 ---- Windows ----
 
-(prefix + c)	# Create new window
-(prefix + w)	# List windows
-(prefix + ,)	# Name window
+(prefix + c)	        # Create new window
+(prefix + w)	        # List windows
+(prefix + ,)	        # Name window
+:swap-window -t -1      # Move current window to the left
+:swap-window -t 1 -s 3          # Swap windows 1 and 3
 
 ----- Panes -----
 
@@ -31,7 +27,9 @@ tmux attach -t [session_name]	# Attach from a session
 (prefix + x)	# Kill pane
 (prefix + C-Dpad) # Resize pane
 
-(prefix + [)    # Enter copy mode
-(prefix + ])    # Paste copy buffer (works for diff pane/window)
+----- Copy -----
 
+(prefix + [)    # Enter copy mode
+Ctrl-V, v       # Visual block copy
+(prefix + ])    # Paste copy buffer (works for diff pane/window)
 

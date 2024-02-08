@@ -1,13 +1,13 @@
 " Whitespace
 set expandtab
-set shiftwidth=2
-set softtabstop=2
+set shiftwidth=4
+set softtabstop=4
 set wrap
 
 " Search
 set hlsearch 
 hi Search ctermbg=None ctermfg=Yellow cterm=bold
-set ignorecase
+" set ignorecase
 set autoindent
 
 " Line Numbers

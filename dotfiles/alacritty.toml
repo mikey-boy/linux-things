@@ -1,0 +1,17 @@
+# themes from https://github.com/alacritty/alacritty-theme
+
+import = ["/home/mike/.config/alacritty/alacritty-theme/themes/gruvbox_dark.toml"]
+
+[font]
+size = 16
+
+[font.normal]
+family = "UbuntuMono Nerd Font"
+
+[window]
+decorations = "none"
+startup_mode = "Maximized"
+
+[window.padding]
+#x = 7
+#y = 0

@@ -1,0 +1,49 @@
+#!/bin/bash
+
+user_home="/home/mike"
+key="$user_home/.ssh/backup.key"
+container="/media/external/arch-important"
+container_unencrypted="/media/veracrypt1"
+targets=(
+    ".keepass/passwords.kdbx"
+    "notes"
+    "Desktop/important-docs"
+)
+
+# User must be root
+if [[ $EUID -ne 0 ]]; then
+    echo "[-] This script must be run as root" 1>&2
+    exit 1
+fi
+
+# ~~~~~~~~~~~~~~~ mounting ~~~~~~~~~~~~~~~~~~~~~~~~
+
+# Mount external drive
+echo "[+] Checking if external drive is mounted"
+if ! mount | grep /media/external >/dev/null; then
+    mount /media/external || exit 1
+fi
+
+# Mount veracrypt volume
+echo "[+] Checking if encrypted container is mounted"
+veracrypt --text --non-interactive --list "$container" >/dev/null 2>&1
+if [ $? -ne 0 ]; then
+    veracrypt --text --non-interactive --password="" --keyfiles="$key" --mount $container /media/veracrypt1 || exit 1
+fi
+
+# ~~~~~~~~~~~~~~~ rsync ~~~~~~~~~~~~~~~~~~~~~~~~
+
+# Backup local files that are newer
+for f in "${targets[@]}"; do
+    rsync -aAXHSROvu "${user_home}/./${f}" "${container_unencrypted}"
+done
+
+# Synchronize remote files that are newer
+for f in "${targets[@]}"; do
+    rsync -aAXHSROvu "${container_unencrypted}/./${f}" "${user_home}"
+done
+
+# ~~~~~~~~~~~~~~~ unmounting ~~~~~~~~~~~~~~~~~~~~~~~~
+
+veracrypt -d $container
+umount /media/external
