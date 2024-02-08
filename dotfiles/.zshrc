@@ -57,9 +57,9 @@ key[Control-Right]="${terminfo[kRIT5]}"
 alias v='nvim'
 #alias vim='nvim'
 
-# cd
+# linux things
 alias lt='cd $HOME/linux-things'
-alias config='cd $HOME/.config'
+alias lt-backup='sudo $HOME/linux-things/scripts/backup-important'
 
 # ls
 alias ls='ls --color=auto'
@@ -68,6 +68,7 @@ alias la='ls -A'
 
 # Github
 alias gs='git status'
+alias gd='git diff'
 alias gb='git branch'
 alias gc='git commit'
 alias gau='git add -u'
@@ -83,6 +84,7 @@ alias kn='kubectl config set-context --current --namespace '
 alias kdbg='kubectl run --image busybox --attach debugger -it --rm'
 
 # Misc
+alias terraform='tf'
 alias objdump='objdump -M intel'
 alias xclip="xclip -selection clipboard"
 alias sv='source .venv/bin/activate'

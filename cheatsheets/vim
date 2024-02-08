@@ -27,11 +27,15 @@ n, N		# Next occurance, previous occurance (depending on search direction)
 
 --- Navigating ---
 
+h j k l         # Left Down Up Right
 Shift-6 (^)	# Shift to beginning of line
 Shift-4	($)	# Shift to end of line
+Shift-g         # Shift to beginning of file
+Shift-G		# Shift to end of file
+Ctrl-F          # Shift forward a page
+Ctrl-B          # Shift backward a page
 Shift-W		# Shift forward a word
 Shift-B		# Shift back a word
-Shift-G		# Shift to end of file
 
 --- Basic commands ---
 
