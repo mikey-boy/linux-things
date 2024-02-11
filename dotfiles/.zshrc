@@ -9,6 +9,7 @@ fi
 
 # Misc
 export LT="$HOME/linux-things"
+export SB="$HOME/notes/obsidian"
 
 # Kubernetes
 export do=(--dry-run=client -o yaml)
@@ -67,14 +68,15 @@ key[Control-Right]="${terminfo[kRIT5]}"
 
 # neovim
 alias v='nvim'
-#alias vim='nvim'
 
 # linux things
 alias lt='cd $LT'
+alias sb='cd $SB'
 
 # ls
 alias ls='ls --color=auto'
 alias ll='ls -l'
+alias lal='ls -al'
 alias lsd='ls -l -t'
 
 # Github
