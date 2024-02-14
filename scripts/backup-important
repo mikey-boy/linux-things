@@ -5,22 +5,22 @@ key="$user_home/.ssh/backup.key"
 container="/media/external/arch-important"
 container_unencrypted="/media/veracrypt1"
 targets=(
-    ".keepass/passwords.kdbx"
-    "notes"
-    "Desktop/important-docs"
+	".keepass/passwords.kdbx"
+	"notes"
+	"Desktop/important-docs"
 )
 
 # User must be root
 if [[ $EUID != 0 ]]; then
-    echo "[-] This script must be run as root" 1>&2
-    exit 1
+	echo "[-] This script must be run as root" 1>&2
+	exit 1
 fi
 
 if [[ $1 != "--pull" && $1 != "--push" ]]; then
-    echo "$0 usage:"
-    echo "  --pull      Pull from remote storage, delete files that are only local"
-    echo "  --push      Push to remote storage, delete files that are only remote"
-    exit 1
+	echo "$0 usage:"
+	echo "  --pull      Pull from remote storage, delete files that are only local"
+	echo "  --push      Push to remote storage, delete files that are only remote"
+	exit 1
 fi
 
 # ~~~~~~~~~~~~~~~ mounting ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -28,60 +28,63 @@ fi
 # Mount external drive
 echo "[+] Checking if external drive is mounted"
 if ! mount | grep /media/external >/dev/null; then
-    mount /media/external || exit 1
+	mount /media/external || exit 1
 fi
 
 # Mount veracrypt volume
 echo "[+] Checking if encrypted container is mounted"
 veracrypt --text --non-interactive --list "$container" >/dev/null 2>&1
 if [[ $? != 0 ]]; then
-    veracrypt --text --non-interactive --password="" --keyfiles="$key" --mount $container /media/veracrypt1 || exit 1
+	veracrypt --text --non-interactive --password="" --keyfiles="$key" --mount $container /media/veracrypt1 || exit 1
 fi
 
 # ~~~~~~~~~~~~~~~ rsync ~~~~~~~~~~~~~~~~~~~~~~~~
 
-# Synchronize local files that are newer
-echo -e "[+] Checking for deleted files:\n"
+src=""
+dest=""
+
 if [[ $1 = "--push" ]]; then
-    for f in "${targets[@]}"; do
-        if rsync -aAXHSROvuin --delete "${user_home}/./${f}" "${container_unencrypted}" | grep "deleting"; then
-            deleted=1
-        fi
-    done
-
-    if [[ -v deleted ]]; then
-        echo ""
-        read -p "[!] The previous files are scheduled for deletion, continue [Y/n]? " usr
-        if [[ $usr = "N" ]] || [[ "$usr" = "n" ]]; then
-            exit 0
-        fi
-    fi
-
-    for f in "${targets[@]}"; do
-        rsync -aAXHSROvu --delete "${user_home}/./${f}" "${container_unencrypted}"
-    done
+	src="${user_home}"
+	dest="${container_unencrypted}"
+elif [[ $1 = "--pull" ]]; then
+	src="${container_unencrypted}/./${f}"
+	dest="${user_home}"
 fi
 
-# Synchronize remote files that are newer
-if [[ $1 = "--pull" ]]; then
-    for f in "${targets[@]}"; do
-        if rsync -aAXHSROvuin --delete "${container_unencrypted}/./${f}" "${user_home}" | grep "deleting"; then
-            deleted=1
-        fi
-    done
+# Manage files that have been deleted
+deleted=()
+for f in "${targets[@]}"; do
+	deleted+=$(rsync -aAXHSROvuin --delete "${src}/./${f}" "${dest}" | grep "deleting" | tr -s ' ' | cut -d' ' -f2)
+done
 
-    if [[ -v deleted ]]; then
-        echo ""
-        read -p "[!] The previous files are scheduled for deletion, continue [Y/n]? " usr
-        if [[ $usr = "N" ]] || [[ "$usr" = "n" ]]; then
-            exit 0
-        fi
-    fi
+if [[ -n "${deleted}" ]]; then
+	echo -e "[+] Files scheduled for deletion:\n"
+	for f in ${deleted}; do
+		echo -e "    ${f}"
+	done
+	echo ""
 
-    for f in "${targets[@]}"; do
-        rsync -aAXHSROvu --delete "${container_unencrypted}/./${f}" "${user_home}"
-    done
+	read -p "[!] Options: [D]elete all, [s]ave all, [c]onfirm manually [D/s/c]? " usr
+	echo ""
+
+	if [[ $usr = "s" ]] || [[ "$usr" = "S" ]]; then
+		for f in ${deleted[@]}; do
+			rsync -aAXHSROvuq "${dest}/./${f}" "${src}"
+		done
+	elif [[ $usr = "c" ]] || [[ "$usr" = "C" ]]; then
+		for f in ${deleted[@]}; do
+			read -p "[!] Delete file '$f' [Y/n] " usr2
+			if [[ "${usr2}" = "N" ]] || [[ "${usr2}" = "n" ]]; then
+				rsync -aAXHSROvuq "${dest}/./${f}" "${src}"
+			fi
+		done
+	fi
 fi
+
+# Backup files from source to destination
+for f in "${targets[@]}"; do
+	rsync -aAXHSROvu --delete "${src}/./${f}" "${dest}"
+done
 
 # ~~~~~~~~~~~~~~~ unmounting ~~~~~~~~~~~~~~~~~~~~~~~~
 
