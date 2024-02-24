@@ -23,4 +23,4 @@ if [[ $# -eq 1 ]]; then
 	filename=$1
 fi
 
-nvim "$SB/zettelkasten/$filename.md" -c :NoNeckPain
+nvim "$SB/zettelkasten/inbox/$filename.md" -c :NoNeckPain
