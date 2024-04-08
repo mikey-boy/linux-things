@@ -19,4 +19,6 @@ pkgfile -l [package]    # List all files installed by this package. Package does
 
 --- Misc ---
 
-pactree [package]       # List package dependencies
+pactree [package]                   # List package dependencies
+paccache -rk0                       # Remove all cached package files
+expac -H M '%m\t%n' | sort -h       # List package sizes with dependencies
