@@ -1,0 +1,90 @@
+#!/bin/bash
+
+key="$HOME/.ssh/backup.key"
+src="/media/external/Backups/arch-system"
+dst="/media/containers/arch-system"
+newdir="${dst}/$(date +%F)"            # Format YYYY-MM-DD
+exclude=(
+    "/dev/*"
+    "/proc/*"
+    "/sys/*"
+    "/tmp/*"
+    "/run/*"
+    "/mnt/*"
+    "/media/*"
+    "/lost+found"
+    "/var/lib/dhcpcd/*"
+    "/home/*/.cache"
+    "/home/*/.mozilla"
+    "/home/*/.local/share/Trash/*"
+    "/home/*/lost+found"
+)
+
+# ~~~~~~~~~~~~~~~ checking network ~~~~~~~~~~~~~~~~~~~~~~~~
+
+if ! ping -c 3 -w 10 rpi3 &> /dev/null; then
+    echo "[-] Network not available"
+    exit 1
+fi
+
+# ~~~~~~~~~~~~~~~ mounting ~~~~~~~~~~~~~~~~~~~~~~~~
+
+# Mount external drive
+if ! mount | grep /media/external &> /dev/null; then
+    echo "[*] Mounting external drive"
+    if ! mount /media/external; then
+        echo "[-] Drive not available"
+        exit 1
+    fi
+fi
+
+# Mount veracrypt container
+if ! veracrypt --text --non-interactive --list ${dst} &> /dev/null; then 
+    echo "[*] Mounting ${dst}"
+    sudo veracrypt --text --non-interactive --password="" --keyfiles="$key" --mount ${src} ${dst} 
+    if  [[ $? != 0 ]]; then
+        echo "[-] Volume not available"
+        exit 1
+    fi
+fi
+
+# ~~~~~~~~~~~~~~~ backup directory ~~~~~~~~~~~~~~~~~~~~~~~~
+
+# If directory exists (from a backup on the same day) abort otherwise we will clobber that directory
+if [ -d ${newdir} ]; then
+    echo "[!] It seems like the backup directory ${newdir} already exists! Exiting now..."
+    exit 1
+fi
+
+
+ts=$(date +%s)
+old=""
+for d in ${dst}/*; do
+    dt=$(echo "${d}" | grep -Eo "[0-9]{4}-[0-9]{2}-[0-9]{2}")
+    cur_ts=$(date -d "${dt}" +%s)
+    if (( $cur_ts < $ts )); then
+        ts=$cur_ts
+        old="${d}"
+    fi
+done
+
+echo "[*] Renaming ${old} to ${newdir}"
+mv "${old}" "${newdir}"
+
+# ~~~~~~~~~~~~~~~ backup ~~~~~~~~~~~~~~~~~~~~~~~~
+
+# Build exclusion list
+exclusionlst=""
+for d in "${exclude[@]}"; do
+    exclusionlst="${exclusionlst} --exclude='${d}'"
+done
+
+# Backup system using rsync
+sudo rsync -aAXHSOv ${exclusionlst} --delete / "${newdir}"
+
+# ~~~~~~~~~~~~~~~ unmounting ~~~~~~~~~~~~~~~~~~~~~~~~
+
+# Unmount veracrypt container
+echo "[*] Unmounting ${dst}"
+sudo veracrypt -d ${dst}
+

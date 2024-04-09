@@ -1,5 +1,17 @@
 #!/bin/bash
 
+# Because unison should be run as a normal user rather than root, it is simplist
+# to allow the 'mike' user to mount the specific NFS share and unlock the veracrypt
+# without needing to enter the sudo password.
+#
+# The first is achieved by modifying /etc/fstab:
+#
+#   rpi3:/external  /media/external     nfs     user,noauto,nofail 0 0
+#
+# The second is achieved by modifing sudoers file (sudo visudo):
+#
+#   %mike   ALL=(root) NOPASSWD: /usr/bin/veracrypt
+
 user_home="/home/mike"
 key="$user_home/.ssh/backup.key"
 src="/media/external/Backups/arch-sync"
@@ -42,7 +54,7 @@ fi
 
 # Backup files from source to destination
 for f in "${targets[@]}"; do
-    unison $user_home $dst -path "$f" -batch
+    unison $user_home $dst -path "$f" -batch -silent -terse
     if  [[ $? != 0 ]]; then
         DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u mike)/bus notify-send "File conflicts when syncing '$f'"
     fi
