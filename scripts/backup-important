@@ -2,91 +2,55 @@
 
 user_home="/home/mike"
 key="$user_home/.ssh/backup.key"
-container="/media/external/arch-important"
-container_unencrypted="/media/veracrypt1"
+src="/media/external/Backups/arch-sync"
+dst="/media/containers/arch-sync"
 targets=(
-	".keepass/passwords.kdbx"
-	"notes"
-	"Desktop/important-docs"
+    ".keepass/passwords.kdbx"
+    "notes"
+    "Desktop/important-docs"
 )
 
-# User must be root
-if [[ $EUID != 0 ]]; then
-	echo "[-] This script must be run as root" 1>&2
-	exit 1
-fi
+# ~~~~~~~~~~~~~~~ checking network ~~~~~~~~~~~~~~~~~~~~~~~~
 
-if [[ $1 != "--pull" && $1 != "--push" ]]; then
-	echo "$0 usage:"
-	echo "  --pull      Pull from remote storage, delete files that are only local"
-	echo "  --push      Push to remote storage, delete files that are only remote"
-	exit 1
+if ! ping -c 3 -w 10 rpi3 &> /dev/null; then
+    echo "[-] Network not available"
+    exit 1
 fi
 
 # ~~~~~~~~~~~~~~~ mounting ~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Mount external drive
-echo "[+] Checking if external drive is mounted"
-if ! mount | grep /media/external >/dev/null; then
-	mount /media/external || exit 1
+if ! mount | grep /media/external &> /dev/null; then
+    echo "[*] Mounting external drive"
+    if ! mount /media/external; then
+        echo "[-] Drive not available"
+        exit 1
+    fi
 fi
 
-# Mount veracrypt volume
-echo "[+] Checking if encrypted container is mounted"
-veracrypt --text --non-interactive --list "$container" >/dev/null 2>&1
-if [[ $? != 0 ]]; then
-	veracrypt --text --non-interactive --password="" --keyfiles="$key" --mount $container /media/veracrypt1 || exit 1
+# Mount veracrypt container
+if ! veracrypt --text --non-interactive --list ${dst} &> /dev/null; then 
+    echo "[*] Mounting ${dst}"
+    sudo veracrypt --text --non-interactive --password="" --keyfiles="$key" --mount ${src} ${dst} 
+    if  [[ $? != 0 ]]; then
+        echo "[-] Volume not available"
+        exit 1
+    fi
 fi
 
-# ~~~~~~~~~~~~~~~ rsync ~~~~~~~~~~~~~~~~~~~~~~~~
-
-src=""
-dest=""
-
-if [[ $1 = "--push" ]]; then
-	src="${user_home}"
-	dest="${container_unencrypted}"
-elif [[ $1 = "--pull" ]]; then
-	src="${container_unencrypted}/./${f}"
-	dest="${user_home}"
-fi
-
-# Manage files that have been deleted
-deleted=()
-for f in "${targets[@]}"; do
-	deleted+=$(rsync -aAXHSROvuin --delete "${src}/./${f}" "${dest}" | grep "deleting" | tr -s ' ' | cut -d' ' -f2)
-done
-
-if [[ -n "${deleted}" ]]; then
-	echo -e "[+] Files scheduled for deletion:\n"
-	for f in ${deleted}; do
-		echo -e "    ${f}"
-	done
-	echo ""
-
-	read -p "[!] Options: [D]elete all, [s]ave all, [c]onfirm manually [D/s/c]? " usr
-	echo ""
-
-	if [[ $usr = "s" ]] || [[ "$usr" = "S" ]]; then
-		for f in ${deleted[@]}; do
-			rsync -aAXHSROvuq "${dest}/./${f}" "${src}"
-		done
-	elif [[ $usr = "c" ]] || [[ "$usr" = "C" ]]; then
-		for f in ${deleted[@]}; do
-			read -p "[!] Delete file '$f' [Y/n] " usr2
-			if [[ "${usr2}" = "N" ]] || [[ "${usr2}" = "n" ]]; then
-				rsync -aAXHSROvuq "${dest}/./${f}" "${src}"
-			fi
-		done
-	fi
-fi
+# ~~~~~~~~~~~~~~~ unison ~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Backup files from source to destination
 for f in "${targets[@]}"; do
-	rsync -aAXHSROvu --delete "${src}/./${f}" "${dest}"
+    unison $user_home $dst -path "$f" -batch
+    if  [[ $? != 0 ]]; then
+        DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u mike)/bus notify-send "File conflicts when syncing '$f'"
+    fi
 done
 
 # ~~~~~~~~~~~~~~~ unmounting ~~~~~~~~~~~~~~~~~~~~~~~~
 
-veracrypt -d $container
-umount /media/external
+# Unmount veracrypt container
+echo "[*] Unmounting ${dst}"
+sudo veracrypt -d ${dst}
+
