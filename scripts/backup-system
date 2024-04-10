@@ -1,6 +1,7 @@
 #!/bin/bash
 
-key="$HOME/.ssh/backup.key"
+user_home="/home/mike"
+key="$user_home/.ssh/backup.key"
 src="/media/external/Backups/arch-system"
 dst="/media/containers/arch-system"
 newdir="${dst}/$(date +%F)"            # Format YYYY-MM-DD
@@ -20,12 +21,31 @@ exclude=(
     "/home/*/lost+found"
 )
 
+# ~~~~~~~~~~~~~~~ checking permissions ~~~~~~~~~~~~~~~~~~~~~~~~
+
+# User must be root
+if [[ $EUID != 0 ]]; then
+    echo "[-] This script must be run as root"
+    exit 1
+fi
+
+# File should be owned by root, not normal user (for privesc reason)
+if [[ $(stat -c "%u" $0) != 0 ]]; then
+    echo "[-] This script must be owned by root"
+    exit 1
+fi
+
 # ~~~~~~~~~~~~~~~ checking network ~~~~~~~~~~~~~~~~~~~~~~~~
 
 if ! ping -c 3 -w 10 rpi3 &> /dev/null; then
     echo "[-] Network not available"
     exit 1
 fi
+
+# ~~~~~~~~~~~~~~~ send warning ~~~~~~~~~~~~~~~~~~~~~~~~
+
+sudo -u mike DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u mike)/bus notify-send "System backup scheduled in 30 minutes ($(date -d '+30 minute' '+%T'))" "You can turn off the system before that time to avoid the backup"
+sleep 30m
 
 # ~~~~~~~~~~~~~~~ mounting ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -55,7 +75,6 @@ if [ -d ${newdir} ]; then
     echo "[!] It seems like the backup directory ${newdir} already exists! Exiting now..."
     exit 1
 fi
-
 
 ts=$(date +%s)
 old=""

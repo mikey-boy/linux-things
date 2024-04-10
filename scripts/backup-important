@@ -54,7 +54,7 @@ fi
 
 # Backup files from source to destination
 for f in "${targets[@]}"; do
-    unison $user_home $dst -path "$f" -batch -silent -terse
+    unison $user_home $dst -path "$f" -batch -terse
     if  [[ $? != 0 ]]; then
         DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u mike)/bus notify-send "File conflicts when syncing '$f'"
     fi
