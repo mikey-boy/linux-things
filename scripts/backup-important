@@ -17,9 +17,10 @@ key="$user_home/.ssh/backup.key"
 src="/media/external/Backups/arch-sync"
 dst="/media/containers/arch-sync"
 targets=(
-    ".keepass/passwords.kdbx"
+    "work"
     "notes"
     "Desktop/important-docs"
+    ".keepass/passwords.kdbx"
 )
 
 # ~~~~~~~~~~~~~~~ checking network ~~~~~~~~~~~~~~~~~~~~~~~~
