@@ -84,6 +84,7 @@ alias gs='git status'
 alias gd='git diff'
 alias gb='git branch'
 alias gc='git commit'
+alias gp='git push'
 alias gau='git add -u'
 
 # Docker
