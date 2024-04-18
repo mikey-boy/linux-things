@@ -1,0 +1,4 @@
+#!/bin/bash
+
+firefox -P work --new-tab https://outlook.office.com/mail/ --new-tab https://teams.microsoft.com/v2/ & disown
+
