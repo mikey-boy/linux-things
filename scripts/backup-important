@@ -67,3 +67,7 @@ done
 echo "[*] Unmounting ${dst}"
 sudo veracrypt -d ${dst}
 
+# Unmount external drive
+echo "[*] Unmounting /media/external"
+umount /media/external
+

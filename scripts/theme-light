@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Change the system theme
+xfconf-query -c xsettings -p /Net/ThemeName -s "Adwaita"
+
 # Change the alacritty theme
 sed -i -e 's/gruvbox_dark.toml/gruvbox_light.toml/g' $LT/dotfiles/alacritty.toml
 

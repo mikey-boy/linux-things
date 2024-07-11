@@ -98,7 +98,10 @@ alias kn='kubectl config set-context --current --namespace '
 alias kdbg='kubectl run --image busybox --attach debugger -it --rm'
 
 # Misc
-alias terraform='tf'
+alias tf='terraform'
+alias ff='firefox'
+alias ff-work='firefox -P work --new-tab https://outlook.office.com/mail/ --new-tab https://teams.microsoft.com/v2/ & disown'
+alias ff-citef='firefox -P citef & disown'
 alias objdump='objdump -M intel'
 alias xclip="xclip -selection clipboard"
 alias sv='source .venv/bin/activate'
@@ -124,6 +127,13 @@ export GOPATH="$HOME/go/"
 # Update Ruby specific environment variables
 export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
 export PATH="$PATH:$GEM_HOME/bin"
+
+# Geekweek Pulumi
+export PULUMI_CONFIG_PASSPHRASE=""
+
+# ~~~~~~~~~~~~~~~ Misc autocompletions ~~~~~~~~~~~~~~~~~~~~~~~~
+
+source /usr/bin/aws_zsh_completer.sh
 
 # ~~~~~~~~~~~~~~~ Powerlevel10k ~~~~~~~~~~~~~~~~~~~~~~~~
 

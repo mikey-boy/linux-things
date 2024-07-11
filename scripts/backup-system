@@ -5,21 +5,6 @@ key="$user_home/.ssh/backup.key"
 src="/media/external/Backups/arch-system"
 dst="/media/containers/arch-system"
 newdir="${dst}/$(date +%F)"            # Format YYYY-MM-DD
-exclude=(
-    "/dev/*"
-    "/proc/*"
-    "/sys/*"
-    "/tmp/*"
-    "/run/*"
-    "/mnt/*"
-    "/media/*"
-    "/lost+found"
-    "/var/lib/dhcpcd/*"
-    "/home/*/.cache"
-    "/home/*/.mozilla"
-    "/home/*/.local/share/Trash/*"
-    "/home/*/lost+found"
-)
 
 # ~~~~~~~~~~~~~~~ checking permissions ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -73,6 +58,7 @@ fi
 # If directory exists (from a backup on the same day) abort otherwise we will clobber that directory
 if [ -d ${newdir} ]; then
     echo "[!] It seems like the backup directory ${newdir} already exists! Exiting now..."
+    sudo veracrypt -d ${dst}
     exit 1
 fi
 
@@ -92,18 +78,16 @@ mv "${old}" "${newdir}"
 
 # ~~~~~~~~~~~~~~~ backup ~~~~~~~~~~~~~~~~~~~~~~~~
 
-# Build exclusion list
-exclusionlst=""
-for d in "${exclude[@]}"; do
-    exclusionlst="${exclusionlst} --exclude='${d}'"
-done
-
 # Backup system using rsync
-sudo rsync -aAXHSOv ${exclusionlst} --delete / "${newdir}"
+sudo rsync -aAXHSO --exclude="/dev/*" --exclude="/proc/*" --exclude="/sys/*" --exclude="/tmp/*" --exclude="/run/*" --exclude="/mnt/*" --exclude="/media/*" --exclude="lost+found/*" --exclude="/var/lib/dhcpcd/*" --exclude="/home/*/.cache/" --exclude="/home/*/.local/share/Trash/" --delete / "${newdir}"
 
 # ~~~~~~~~~~~~~~~ unmounting ~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Unmount veracrypt container
 echo "[*] Unmounting ${dst}"
 sudo veracrypt -d ${dst}
+
+# Unmount external drive
+echo "[*] Unmounting /media/external"
+umount /media/external
 
