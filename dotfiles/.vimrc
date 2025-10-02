@@ -22,3 +22,14 @@ filetype plugin indent on
 " Key mappings
 map [1;5D <C-Left>
 map [1;5C <C-Right>
+
+
+" Custom Commands
+
+function! CopyMatches(reg)
+  let hits = []
+  %s//\=len(add(hits, submatch(0))) ? submatch(0) : ''/gne
+  let reg = empty(a:reg) ? '+' : a:reg
+  execute 'let @'.reg.' = join(hits, "\n") . "\n"'
+endfunction
+command! -register CopyMatches call CopyMatches(<q-reg>)

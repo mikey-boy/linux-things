@@ -23,8 +23,8 @@ tmux attach -t [session_name]	# Attach from a session
 
 (prefix + %)	# Vertical split
 (prefix + ")	# Horizontal split
-(prefix + Dpad)	# Switch pane
 (prefix + x)	# Kill pane
+(prefix + {)    # Rotate pane
 (prefix + C-Dpad) # Resize pane
 
 ----- Copy -----

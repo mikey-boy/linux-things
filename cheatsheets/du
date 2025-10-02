@@ -1,0 +1,3 @@
+--- Overview ---
+
+du -hs *    # List disk usage of files / folders in current directory

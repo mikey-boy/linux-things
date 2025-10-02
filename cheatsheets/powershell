@@ -1,4 +1,4 @@
-# Basic Commands
+--- Basic Commands ---
 
 echo
 gc 		# Get contents of file
@@ -10,6 +10,10 @@ mv
 ps		# Get running processes
 rm
 
-# Int to hex 
+--- Other Commands ---
+
+Get-FileHash {file} # Get SHA256 of a file
+
+--- Formatting ---
 
 '{0:X}' -f [integer]

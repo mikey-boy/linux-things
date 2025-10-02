@@ -100,8 +100,6 @@ alias kdbg='kubectl run --image busybox --attach debugger -it --rm'
 # Misc
 alias tf='terraform'
 alias ff='firefox'
-alias ff-work='firefox -P work --new-tab https://outlook.office.com/mail/ --new-tab https://teams.microsoft.com/v2/ & disown'
-alias ff-citef='firefox -P citef & disown'
 alias objdump='objdump -M intel'
 alias xclip="xclip -selection clipboard"
 alias sv='source .venv/bin/activate'
@@ -134,6 +132,12 @@ export PULUMI_CONFIG_PASSPHRASE=""
 # ~~~~~~~~~~~~~~~ Misc autocompletions ~~~~~~~~~~~~~~~~~~~~~~~~
 
 source /usr/bin/aws_zsh_completer.sh
+
+# ~~~~~~~~~~~~~~~ Pyenv ~~~~~~~~~~~~~~~~~~~~~~~~
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
 
 # ~~~~~~~~~~~~~~~ Powerlevel10k ~~~~~~~~~~~~~~~~~~~~~~~~
 

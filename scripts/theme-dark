@@ -4,7 +4,7 @@
 xfconf-query -c xsettings -p /Net/ThemeName -s "Adwaita-dark"
 
 # Change the alacritty theme
-sed -i -e 's/gruvbox_light.toml/gruvbox_dark.toml/g' $LT/dotfiles/alacritty.toml
+sed -i -e 's/everforest_light.toml/everforest_dark.toml/g' $LT/dotfiles/alacritty.toml
 
 # Change the neovim theme
 sed -i -e 's/vim.o.background = "light"/vim.o.background = "dark"/g' $LT/dotfiles/nvim/init.lua
@@ -12,3 +12,6 @@ sed -i -e 's/vim.o.background = "light"/vim.o.background = "dark"/g' $LT/dotfile
 # Change the browser theme
 find ~/.mozilla -name user.js -exec \
     sed -i -e 's/user_pref("layout.css.prefers-color-scheme.content-override", 1);/user_pref("layout.css.prefers-color-scheme.content-override", 0);/' {} \;
+
+# Change background image for home desktop
+xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitorDP-1-2/workspace1/last-image -s /usr/share/backgrounds/firewatch3.jpg

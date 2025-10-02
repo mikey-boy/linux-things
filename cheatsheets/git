@@ -8,3 +8,7 @@ git remote add origin [url].git     # Add existing project
 git fetch origin                    # Update remote tracking branches
 git checkout -b [br] origin/[br]    # Checkout remote branch locally
 
+--- misc ---
+
+GIT_LFS_SKIP_SMUDGE=1 git clone     # Clone a repository without LFS objects
+

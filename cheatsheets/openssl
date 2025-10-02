@@ -1,0 +1,16 @@
+--- create csr ---
+
+openssl genrsa -des3 -out <file>.key 2048           # Create private key for the server
+openssl rsa -in <file>.key -out <file>.copy         # Duplicate private key without password
+openssl req -new -key <file>.key -out <file>.csr    # Create CSR
+
+--- create cert ---
+
+openssl x509 -req -days 365 -in <file>.csr -signkey <file>.key -out <file>.crt      # Self-signed cert
+
+https://ubuntu.com/server/docs/certificates#certification-authority                 # Create your own CA
+
+--- verification ---
+
+openssl req -noout -text -in <file>.csr     # Verify the contents of a CSR
+openssl x509 -noout -text -in <file>.crt    # Verify the contents of a cert

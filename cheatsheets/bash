@@ -26,3 +26,12 @@ while read -r line; do
 	echo "$line"
 done < "/path/to/file"
 
+# Iterate through lines of a command
+while read -r file; do
+    echo $file;
+done <<< $(<command>)
+
+--- Misc ---
+
+# Convert filenames from png -> webp
+for f in *.png; do echo ${f%.*}.webp; done

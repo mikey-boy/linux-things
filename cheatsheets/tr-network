@@ -1,0 +1,24 @@
+--- Misc ---
+
+ip addr list            # List network interfaces
+ip route                # List routing table
+
+ss -antl                # Display listening TCP sockets
+
+iptables -L             # List all chains and rules
+iptables -L -t nat      # List NAT rules
+
+lsof -i tcp:80          # List process that has port 80 opened
+
+--- Mods ---
+
+ip link set dev {DEVICE} {up|down}  # Set device up or down
+
+ip route add {X.X.X.X}/24 via X.X.X.X dev {DEVICE}  # Specify a new route
+ip route delete default                             # Delete the default route
+ip route add default via {X.X.X.X}                  # Add a default gateway
+
+dhclient -r {DEVICE}                # Release any lease you may have for this interface
+dhclient -v -4 {DEVICE}             # Acquire a new lease for this interface
+dhcpcd -n {DEVICE}                  # Acquire a new lease for this interface (using dhcpcd)
+

@@ -5,9 +5,12 @@ Ctrl+r 	# Redo
 
 --- Cut/Paste (Visual Mode) ---
 
-v/V/Ctrl-v 	# v selects characters, V selects lines, Ctrl-v selects blocks
-d/y		# d to cut, y to copy
-p/P		# Paste
+v/V/Ctrl-v 	        # v selects characters, V selects lines, Ctrl-v selects blocks
+d/y		        # d to cut, y to copy
+p/P		        # Paste
+:g/pattern/y A          # Copy the matching lines into register A
+:bufdo CopyMatches A    # Copy exact matches from buffers into register A
+"ap                     # Paste contents of register a
 
 --- Cut/Paste (Normal Mode) ---
 

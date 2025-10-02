@@ -1,73 +1,57 @@
 #!/bin/bash
 
-# Because unison should be run as a normal user rather than root, it is simplist
-# to allow the 'mike' user to mount the specific NFS share and unlock the veracrypt
-# without needing to enter the sudo password.
-#
-# The first is achieved by modifying /etc/fstab:
-#
-#   rpi3:/external  /media/external     nfs     user,noauto,nofail 0 0
-#
-# The second is achieved by modifing sudoers file (sudo visudo):
-#
-#   %mike   ALL=(root) NOPASSWD: /usr/bin/veracrypt
-
-user_home="/home/mike"
-key="$user_home/.ssh/backup.key"
-src="/media/external/Backups/arch-sync"
-dst="/media/containers/arch-sync"
+mnt="/mnt/nextcloud"
+dir="${mnt}/backup"
 targets=(
-    "work"
     "notes"
     "Desktop/important-docs"
     ".keepass/passwords.kdbx"
 )
 
-# ~~~~~~~~~~~~~~~ checking network ~~~~~~~~~~~~~~~~~~~~~~~~
-
-if ! ping -c 3 -w 10 rpi3 &> /dev/null; then
-    echo "[-] Network not available"
-    exit 1
-fi
-
-# ~~~~~~~~~~~~~~~ mounting ~~~~~~~~~~~~~~~~~~~~~~~~
-
-# Mount external drive
-if ! mount | grep /media/external &> /dev/null; then
-    echo "[*] Mounting external drive"
-    if ! mount /media/external; then
+# Mount Nextcloud drive
+if ! mount | grep ${mnt} &> /dev/null; then
+    echo "[*] Mounting nextcloud drive"
+    rclone mount nextcloud: /mnt/nextcloud/ \
+        --vfs-cache-mode full \
+        --vfs-cache-max-age 1h \
+        --vfs-cache-max-size 1G \
+        --buffer-size 16M \
+        --dir-cache-time 72h \
+        --umask 002 \
+        --uid 1000 \
+        --gid 1000 \
+        --daemon
+    if ! mount | grep ${mnt}; then
         echo "[-] Drive not available"
         exit 1
     fi
 fi
 
-# Mount veracrypt container
-if ! veracrypt --text --non-interactive --list ${dst} &> /dev/null; then 
-    echo "[*] Mounting ${dst}"
-    sudo veracrypt --text --non-interactive --password="" --keyfiles="$key" --mount ${src} ${dst} 
-    if  [[ $? != 0 ]]; then
-        echo "[-] Volume not available"
-        exit 1
-    fi
+# If directory exists abort otherwise we will clobber that directory
+olddir=""
+newdir="${dir}/$(date -I'minutes')"
+if [ -d ${newdir} ]; then
+    echo "[!] It seems like the backup directory ${newdir} already exists! Exiting now..."
+    exit 1
 fi
 
-# ~~~~~~~~~~~~~~~ unison ~~~~~~~~~~~~~~~~~~~~~~~~
+# Update the list of packages explicitely installed by pacman
+pacman -Qe > /home/mike/Desktop/important-docs/pacman.list
 
-# Backup files from source to destination
-for f in "${targets[@]}"; do
-    unison $user_home $dst -path "$f" -batch -terse
-    if  [[ $? != 0 ]]; then
-        DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u mike)/bus notify-send "File conflicts when syncing '$f'"
+# Reuse oldest backup, update existing files
+ts=$(date +%s)
+for dt in ${dir}/*; do
+    cur_ts=$(date -d "$(echo ${dt}| rev | cut -d'/' -f1 | rev)" +%s)
+    if (( $cur_ts < $ts )); then
+        ts=$cur_ts
+        olddir="${dt}"
     fi
 done
 
-# ~~~~~~~~~~~~~~~ unmounting ~~~~~~~~~~~~~~~~~~~~~~~~
+echo "[*] Renaming ${olddir} to ${newdir}"
+mv "${olddir}" "${newdir}"
 
-# Unmount veracrypt container
-echo "[*] Unmounting ${dst}"
-sudo veracrypt -d ${dst}
-
-# Unmount external drive
-echo "[*] Unmounting /media/external"
-umount /media/external
-
+# Backup files from source to destination
+for f in "${targets[@]}"; do
+    rsync -azSPOv --exclude="**/.git/**" --delete /home/mike/${f} ${newdir}
+done
