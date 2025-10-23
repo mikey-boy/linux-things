@@ -11,7 +11,7 @@ targets=(
 # Mount Nextcloud drive
 if ! mount | grep ${mnt} &> /dev/null; then
     echo "[*] Mounting nextcloud drive"
-    rclone mount nextcloud: /mnt/nextcloud/ \
+    rclone mount nextcloud: ${mnt} \
         --vfs-cache-mode full \
         --vfs-cache-max-age 1h \
         --vfs-cache-max-size 1G \
@@ -53,5 +53,8 @@ mv "${olddir}" "${newdir}"
 
 # Backup files from source to destination
 for f in "${targets[@]}"; do
-    rsync -azSPOv --exclude="**/.git/**" --delete /home/mike/${f} ${newdir}
+    rsync -azSO --partial --no-perms --no-owner --no-group --exclude="**/.git/**" --info=name,progress --delete /home/mike/${f} ${newdir}
 done
+
+echo "[*] Unmounting nextcloud drive"
+umount ${mnt}

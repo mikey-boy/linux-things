@@ -1,0 +1,8 @@
+--- Generations ---
+
+nixos-rebuild test                  # Build and activate generation, but don't add it to GRUB boot menu
+nixos-rebuild switch                # Build and activate a new generation
+nixos-rebuild switch --rollback     # Rollback to an old generation
+nixos-rebuild list-generations      # List the generations built on the system
+nix-collect-garbage -d              # Delete all other generations that are not the current one
+
