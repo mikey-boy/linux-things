@@ -1,0 +1,12 @@
+--- basic ---
+
+svn add [filename]      # add file to version control system
+svn commit -m "[msg]"   # push updates for all tracked files to SVN server
+
+--- exploring ---
+
+svn log -l [n]                          # list the previous n commits, with commit messages
+svn log --search '[key1|key2]' -l [n]   # list the previous n commits, that contain keyword
+svn up -r [revision]                    # revert to a previous revision
+svn diff -c [revision]                  # display changes made by a particular revision
+

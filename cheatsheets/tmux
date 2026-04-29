@@ -5,7 +5,8 @@ tmux list-sessions		# List existing tmux sessions
 tmux switch -t [session_name]	# Switch to existing session
 tmux kill-session -t [session]  # Kill a session
 tmux detach (prefix + d) 	# Detach from a session
-tmux attach -t [session_name]	# Attach from a session
+tmux attach -t [name]	        # Attach to a session
+tmux attach -t [name] -c [dir]  # Attach to session, change default dir
 
 --- Within Session ---
 
@@ -17,7 +18,8 @@ tmux attach -t [session_name]	# Attach from a session
 (prefix + w)	        # List windows
 (prefix + ,)	        # Name window
 :swap-window -t -1      # Move current window to the left
-:swap-window -t 1 -s 3          # Swap windows 1 and 3
+:swap-window -t 1 -s 3  # Swap windows 1 and 3
+:move-window -t 0:2     # Move window 2 of session 0 to the current session
 
 ----- Panes -----
 

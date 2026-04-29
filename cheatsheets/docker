@@ -6,9 +6,10 @@ docker build . -t <tag>
 
 docker run --rm                       # Run a container, delete it after closing
   -t                                  # Allocate pseudo-tty (for output of process)
+  -n <name>                           # Assign a name to the container
   -v <host-vol>:<container-vol>       # Mount volumes b/w host and container
   -p <host-port>:<container-port>     # Map ports b/w host and container
-  <container>
+  <image>
 
 docker exec -it <container> <process> # Attach and execute process in container  
 

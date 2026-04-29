@@ -1,0 +1,29 @@
+#
+# Simple Windows Command Cheatsheet
+#
+
+
+#---- FILE SEARCHING ----#
+
+
+#---- UPDATING SYSTEM ----#
+
+
+#---- SERVICES ----#
+
+Get-Service                                             # List all services on the system
+Get-Service "*[keyword]*"                               # List services that contain keyword
+Get-Service | Where-Object {$_.Status -eq "Running"}    # List running services
+
+Start-Service "[service]"   # Start a service
+Stop-Service "[service]"    # Stop a service
+
+#---- NETWORKING ----#
+
+netstat -anb                                            # Display all connections and listening ports, with associated executable
+netstat -anp TCP                                        # Display all TCP connections and listening ports
+netstat -anb | Select-String "LISTENING"                # Display all listening connections
+
+#---- MISC ----#
+
+Get-FileHash -Path "[filepath]" -Algorithm SHA256       # Calculate the SHA256 sum of a file

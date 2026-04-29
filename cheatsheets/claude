@@ -1,0 +1,14 @@
+--- conversations ---
+
+/init                   # read over files in project to understand it, produces CLAUDE.md
+/rename [session]       # rename a session
+/export [file].md       # export full conversation to a file
+/resume                 # open session picker
+/history                # list all commands run across sessions
+
+--- context ---
+
+<esc> <esc>             # return to a previous point in convo, forget recent messages
+/compact                # after claude has learned something useful and you want to carry it forward
+/clear                  # remove context and conversation history
+
