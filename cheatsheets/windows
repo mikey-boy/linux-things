@@ -5,6 +5,8 @@
 
 #---- FILE SEARCHING ----#
 
+Get-ChildItem "[filepath]" -include *.c -recurse        # Recursively search through path, returning matching files
+Get-Content "[filepath]" -Tail 50 -Wait                 # Monitor the contents of a file
 
 #---- UPDATING SYSTEM ----#
 
@@ -24,6 +26,21 @@ netstat -anb                                            # Display all connection
 netstat -anp TCP                                        # Display all TCP connections and listening ports
 netstat -anb | Select-String "LISTENING"                # Display all listening connections
 
+#---- ACTIVE DIRECTORY ----#
+
+Get-ADOrganizationalUnit -Filter *                      # Get Organization Unit info
+New-ADUser -Name "Jane Doe"                             # Add new use to domain
+    -GivenName "Jane" 
+    -Surname "Doe"
+    -SamAccountName "jdoe" 
+    -UserPrincipalName "jdoe@contoso.local" 
+    -Path "CN=Users,DC=contoso,DC=local" 
+    -AccountPassword (ConvertTo-SecureString "Password123!" -AsPlainText -Force) 
+    -Enabled $true
+
 #---- MISC ----#
 
 Get-FileHash -Path "[filepath]" -Algorithm SHA256       # Calculate the SHA256 sum of a file
+Set-ExecutionPolicy unrestricted                        # Allow running arbitrary Powershell scripts
+(Get-Item "C:\Windows\System32\<file>.dll").VersionInfo # Get the file version of a particular dll
+

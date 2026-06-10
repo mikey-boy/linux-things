@@ -44,6 +44,10 @@ x/[nfu] [address]	# Print memory
 
 #i.e. x/16xw $esp
 
+--- Options ---
+
+set breakpoint pending on   # Allows you to break within an unloaded shared library
+set follow-fork-mode child  # Follow the child, instead of the parent, on fork
 
 --- GEF ---
 

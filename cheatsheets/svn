@@ -1,7 +1,8 @@
 --- basic ---
 
-svn add [filename]      # add file to version control system
-svn commit -m "[msg]"   # push updates for all tracked files to SVN server
+svn add [filename]                      # add file to version control system
+svn revert [filename]                   # revert some local changes
+svn commit -m "[msg]"                   # push updates for all tracked files to SVN server
 
 --- exploring ---
 

@@ -3,6 +3,7 @@
 sudo apt update			# Updates the package listing
 sudo apt install [app/file.deb] # Installs specified application
 sudo apt upgrade		# Install latest version of software
+sudo apt clean                  # Remove apt package cache
 
 --- Removing apps ---
 

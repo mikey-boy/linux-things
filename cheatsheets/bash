@@ -12,7 +12,7 @@ simple(){
 arr=(foo bar)
 
 # And their values can be iterated over like this
-for i in "${arr[*]}"; do echo "$i"; done
+for i in "${arr@*]}"; do echo "$i"; done
 
 --- Loops ---
 

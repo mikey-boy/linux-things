@@ -1,13 +1,19 @@
 --- General ---
 
-iptables -vnL		# List all rules for table, show in and out interface
-iptables -F		# Flush all rules for builtin chains
+iptables -vL --line-numbers     # List all rules for table, show in and out interface
+iptables -F		        # Flush all rules for builtin chains
 
---- Adding rules ---
+--- Managing rules ---
 
 iptables -P [chain] [target]	# Set default filter policy
+iptables -D [chain] [rulenum]   # Drop a rule, specified by rulenum
+iptables -A [chain]             # Append a rule to a chain
+	 -i [interface] 
+	 -j [target]
 
-iptables 	
-	-A [chain] 
-	-i [interface] 
-	-j [target]
+--- Example ---
+
+iptables -I OUTPUT 8 -d [ip]    # Allow HTTPS traffic to a particular server
+         -p tcp --dport 443 
+         -j ACCEPT
+
