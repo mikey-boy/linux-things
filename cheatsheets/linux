@@ -1,8 +1,3 @@
-#
-# Simple Linux Command Cheatsheet
-#
-
-
 #---- FILE SEARCHING ----#
 
 updatedb			# Make sure you run updatedb prior to using
@@ -17,5 +12,6 @@ systemctl enable [service]	# Start specified service at boot time
 
 #---- FILESYSTEM ----#
 
+pvresize /dev/sda[1,2,3]                    # Resize a physical volume after enlarging the partition
 lvextend -l +100%FREE /dev/mapper/[lvm]     # Extend lv (when there is space in the pv)
 resize2fs /dev/mapper/[lvm]                 # Resize ext4 filesystem on lv

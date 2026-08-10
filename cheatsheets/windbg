@@ -1,0 +1,45 @@
+--- basic ---
+
+.<command>          # run a built-in command
+!<command>          # run an extension command
+CTRL+C              # stop execution and break into target
+
+--- config ---
+
+!sym noisy          # verbose symbol loading details
+.reload             # reload symbols of loaded modules
+.sym                # display the current sympath
+
+--- inspecting ---
+
+lm                  # print list of loaded modules
+x <module>!<symbol> # print loaded symbols (wildcards on both accepted)
+
+--- breakpoints ---
+
+bp <addr/mod!sym>   # set breakpoint
+bl                  # list breakpoints
+bc * / bc <id>      # clear breakpoint
+bp /<n> <location>  # temporary breakpoint (break n times)
+
+--- navigation ---
+
+g                   # continue
+p                   # step over
+t                   # step into
+tt                  # trace until next return
+
+--- program state ---
+
+k                   # print call stack
+r [reg]             # print registry value(s)
+ub rip              # show disassembly backwards from PC
+u  rip              # show disassembly forwards from PC
+dp [reg]            # displays the contents of the memory referenced by the pointer in registry
+heap -i [addr]      # display detailed info for a block at given address
+
+
+--- misc ---
+
+"C:\Program Files (x86)\Windows Kits\10\Debuggers\x64"      # common path for windbg.exe, ntsd.exe, etc. 
+

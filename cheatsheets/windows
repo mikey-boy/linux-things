@@ -10,6 +10,7 @@ Get-Content "[filepath]" -Tail 50 -Wait                 # Monitor the contents o
 
 #---- UPDATING SYSTEM ----#
 
+Get-WindowsUpdate -AcceptAll -Install -AutoReboot       # Download and install Windows updates, rebooting if necessary
 
 #---- SERVICES ----#
 

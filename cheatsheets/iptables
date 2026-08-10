@@ -13,7 +13,7 @@ iptables -A [chain]             # Append a rule to a chain
 
 --- Example ---
 
-iptables -I OUTPUT 8 -d [ip]    # Allow HTTPS traffic to a particular server
+iptables -I OUTPUT [pos] -d [ip]    # Insert rule into position 8 of a chain, allowing HTTPS traffic
          -p tcp --dport 443 
          -j ACCEPT
 

@@ -1,0 +1,8 @@
+--- Filtering ---
+
+jq ".[] | .genre"                                   # retrieve the genre value from each element of array 
+jq '.[] | select(.genre | contains("house"))'       # filter based array of elements based on 'genre' key
+
+--- Resources ---
+
+https://github.com/jqlang/jq/wiki/Cookbook
