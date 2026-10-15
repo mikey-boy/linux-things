@@ -12,6 +12,7 @@ systemctl enable [service]	# Start specified service at boot time
 
 #---- FILESYSTEM ----#
 
-pvresize /dev/sda[1,2,3]                    # Resize a physical volume after enlarging the partition
+fdisk /dev/sdX                              # Modify the partition table
+pvresize /dev/sdXY                          # Resize a physical volume after enlarging the partition
 lvextend -l +100%FREE /dev/mapper/[lvm]     # Extend lv (when there is space in the pv)
 resize2fs /dev/mapper/[lvm]                 # Resize ext4 filesystem on lv

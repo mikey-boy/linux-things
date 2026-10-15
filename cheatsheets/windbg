@@ -19,6 +19,7 @@ x <module>!<symbol> # print loaded symbols (wildcards on both accepted)
 
 bp <addr/mod!sym>   # set breakpoint
 bl                  # list breakpoints
+bd <id> / bd <id>   # disable / enable breakpoints
 bc * / bc <id>      # clear breakpoint
 bp /<n> <location>  # temporary breakpoint (break n times)
 
