@@ -89,6 +89,7 @@ alias gau='git add -u'
 
 # Docker
 alias docker='sudo docker'
+alias docker-compose='sudo docker-compose'
 alias dockershell="docker run --rm -i -t --entrypoint=/bin/bash"
 alias dockershellsh="docker run --rm -i -t --entrypoint=/bin/sh"
 
@@ -128,16 +129,6 @@ export PATH="$PATH:$GEM_HOME/bin"
 
 # Geekweek Pulumi
 export PULUMI_CONFIG_PASSPHRASE=""
-
-# ~~~~~~~~~~~~~~~ Misc autocompletions ~~~~~~~~~~~~~~~~~~~~~~~~
-
-source /usr/bin/aws_zsh_completer.sh
-
-# ~~~~~~~~~~~~~~~ Pyenv ~~~~~~~~~~~~~~~~~~~~~~~~
-
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - zsh)"
 
 # ~~~~~~~~~~~~~~~ Powerlevel10k ~~~~~~~~~~~~~~~~~~~~~~~~
 
