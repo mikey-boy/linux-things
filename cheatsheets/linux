@@ -1,3 +1,11 @@
+#
+# Simple Linux Command Cheatsheet
+#
+
+#---- WRITING ----#
+
+setxkbmap -option compose:ralt  # Set right alt as the compose key (right alt + ' + e = é) 
+
 #---- FILE SEARCHING ----#
 
 updatedb			# Make sure you run updatedb prior to using
