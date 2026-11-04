@@ -1,0 +1,5 @@
+--- Basic ---
+
+john --list=formats                                         # List the password formats supported by john
+john --wordlist=<wordlist> --format=<format> <pwd-file>     # Crack a password with a wordlist
+

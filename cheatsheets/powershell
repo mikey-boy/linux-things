@@ -1,18 +1,13 @@
 --- Basic Commands ---
 
-echo
 gc 		# Get contents of file
 gsv		# Get services
-ls
-man
-mkdir
-mv
 ps		# Get running processes
-rm
 
---- Other Commands ---
+--- File Commands ---
 
-Get-FileHash {file} # Get SHA256 of a file
+Invoke-WebRequest -Uri "[url]" -OutFile [dest]  # Download file from url, store it in dest
+Get-FileHash {file}                             # Get SHA256 of a file
 
 --- Formatting ---
 
