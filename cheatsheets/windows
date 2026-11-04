@@ -2,15 +2,22 @@
 # Simple Windows Command Cheatsheet
 #
 
-
-#---- FILE SEARCHING ----#
+#---- FILES ----#
 
 Get-ChildItem "[filepath]" -include *.c -recurse        # Recursively search through path, returning matching files
 Get-Content "[filepath]" -Tail 50 -Wait                 # Monitor the contents of a file
+Invoke-WebRequest -Uri $url -OutFile $dest              # Download file from URL, store it locally
 
-#---- UPDATING SYSTEM ----#
+#---- OPERATING SYSTEM ----#
 
 Get-WindowsUpdate -AcceptAll -Install -AutoReboot       # Download and install Windows updates, rebooting if necessary
+systeminfo                                              # Get generic OS-level information
+
+#---- USERS --- #
+
+net user /add backdoor P@ssw0rd123!                     # Create a user with password
+net localgroup                                          # List groups (local to the system)
+net localgroup administrators backdoor /add             # Add them to winrm group
 
 #---- SERVICES ----#
 
@@ -30,7 +37,7 @@ netstat -anb | Select-String "LISTENING"                # Display all listening 
 #---- ACTIVE DIRECTORY ----#
 
 Get-ADOrganizationalUnit -Filter *                      # Get Organization Unit info
-New-ADUser -Name "Jane Doe"                             # Add new use to domain
+New-ADUser -Name "Jane Doe"                             # Add new user to domain
     -GivenName "Jane" 
     -Surname "Doe"
     -SamAccountName "jdoe" 
@@ -39,9 +46,17 @@ New-ADUser -Name "Jane Doe"                             # Add new use to domain
     -AccountPassword (ConvertTo-SecureString "Password123!" -AsPlainText -Force) 
     -Enabled $true
 
+#---- REGISTRY ----#
+
+Get-psdrive                                             # Get available drives, registries have the 'Registy' provider. Can be managed like normal files (i.e. cd HKLM:\)
+dir                                                     # Get nested registry keys, and their properties
+Set-ItemProperty -Path <key> -Name <param> -Value 1     # Create/Modify registry parameter
+Remove-ItemProperty                                     # Remove registry parameter
+
 #---- MISC ----#
 
 Get-FileHash -Path "[filepath]" -Algorithm SHA256       # Calculate the SHA256 sum of a file
 Set-ExecutionPolicy unrestricted                        # Allow running arbitrary Powershell scripts
 (Get-Item "C:\Windows\System32\<file>.dll").VersionInfo # Get the file version of a particular dll
-
+Get-ChildItem -Path Env:                                # Get all environment variables
+echo $env:path                                          # Get the current PATH variable

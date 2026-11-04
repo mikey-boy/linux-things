@@ -1,0 +1,3 @@
+--- reverse shells ---
+
+rlwrap -cAr <netcat listener>       # provides readline's line editing, persistent history and completion
